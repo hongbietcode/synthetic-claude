@@ -5,7 +5,7 @@
   },
   "plugins": [
     {
-      "name": "agent-debate",
+    "name": "synthetic-claude",
       "source": "./",
       "description": "Multi-agent debate with 3-phase workflow (Individual → Discussion → Synthesis)",
       "version": "1.0.0",

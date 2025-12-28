@@ -28,15 +28,15 @@ Individual → Discussion → Synthesis
 ### Install Plugin
 
 ```bash
-/plugin install agent-debate@synthetic-claude
+/plugin install synthetic-claude@synthetic-claude
 ```
 
 ### Scope Options
 
 ```bash
-/plugin install agent-debate@synthetic-claude --scope user     # Personal (default)
-/plugin install agent-debate@synthetic-claude --scope project  # Team/version control
-/plugin install agent-debate@synthetic-claude --scope local    # Project-specific
+/plugin install synthetic-claude@synthetic-claude --scope user     # Personal (default)
+/plugin install synthetic-claude@synthetic-claude --scope project  # Team/version control
+/plugin install synthetic-claude@synthetic-claude --scope local    # Project-specific
 ```
 
 ## Usage
@@ -74,9 +74,9 @@ Individual → Discussion → Synthesis
 /plugin marketplace update synthetic-claude        # Update marketplace
 /plugin marketplace remove synthetic-claude        # Remove marketplace
 
-/plugin disable agent-debate@synthetic-claude      # Disable plugin
-/plugin enable agent-debate@synthetic-claude       # Enable plugin
-/plugin uninstall agent-debate@synthetic-claude    # Uninstall plugin
+/plugin disable synthetic-claude@synthetic-claude      # Disable plugin
+/plugin enable synthetic-claude@synthetic-claude       # Enable plugin
+/plugin uninstall synthetic-claude@synthetic-claude    # Uninstall plugin
 ```
 
 ## Structure
