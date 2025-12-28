@@ -1,19 +1,16 @@
 {
   "name": "synthetic-claude",
-  "version": "1.0.0",
-  "description": "Extensible Claude Code plugin with multi-agent debate and more",
-  "author": {
-    "name": "Your Name",
-    "url": "https://github.com/yourusername"
+  "owner": {
+    "name": "hongbietcode"
   },
-  "license": "MIT",
-  "keywords": ["multi-agent", "debate", "brainstorm", "synthetic", "claude-code"],
   "plugins": [
     {
       "name": "agent-debate",
       "source": "./",
       "description": "Multi-agent debate with 3-phase workflow (Individual → Discussion → Synthesis)",
       "version": "1.0.0",
+      "license": "MIT",
+      "keywords": ["multi-agent", "debate", "brainstorm", "synthetic"],
       "category": "workflows",
       "commands": ["./commands/debate.md"],
       "agents": [

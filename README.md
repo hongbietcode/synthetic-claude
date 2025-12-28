@@ -1,6 +1,6 @@
 # Synthetic Claude
 
-Extensible Claude Code plugin with multi-agent capabilities.
+Extensible Claude Code plugin with multi-agent debate capabilities.
 
 ## Features
 
@@ -19,9 +19,24 @@ Individual → Discussion → Synthesis
 
 ## Installation
 
+### Add Marketplace
+
 ```bash
-cd plugins/synthetic-claude
-./install.sh
+/plugin marketplace add hongbietcode/synthetic-claude
+```
+
+### Install Plugin
+
+```bash
+/plugin install agent-debate@synthetic-claude
+```
+
+### Scope Options
+
+```bash
+/plugin install agent-debate@synthetic-claude --scope user     # Personal (default)
+/plugin install agent-debate@synthetic-claude --scope project  # Team/version control
+/plugin install agent-debate@synthetic-claude --scope local    # Project-specific
 ```
 
 ## Usage
@@ -52,10 +67,16 @@ cd plugins/synthetic-claude
 - {action items}
 ```
 
-## Uninstall
+## Plugin Management
 
 ```bash
-./uninstall.sh
+/plugin marketplace list                           # List marketplaces
+/plugin marketplace update synthetic-claude        # Update marketplace
+/plugin marketplace remove synthetic-claude        # Remove marketplace
+
+/plugin disable agent-debate@synthetic-claude      # Disable plugin
+/plugin enable agent-debate@synthetic-claude       # Enable plugin
+/plugin uninstall agent-debate@synthetic-claude    # Uninstall plugin
 ```
 
 ## Structure
@@ -74,20 +95,15 @@ synthetic-claude/
 ├── skills/
 │   └── debate-workflow/
 │       └── SKILL.md
-├── install.sh
-├── uninstall.sh
 └── README.md
 ```
 
 ## Adding New Features
 
-To add new agents/commands:
-
 1. Add agent file to `agents/`
 2. Add command file to `commands/`
 3. Add skill directory to `skills/`
-4. Update `marketplace.json`
-5. Update install/uninstall scripts
+4. Update `marketplace.json` to register components
 
 ## License
 
