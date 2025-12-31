@@ -28,7 +28,8 @@
             ],
             "skills": [
                 "./skills/debate-workflow"
-            ]
+            ],
+            "strict": false
         }
     ]
 }
