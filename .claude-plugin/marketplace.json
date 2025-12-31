@@ -1,25 +1,34 @@
 {
-  "name": "synthetic-claude",
-  "owner": {
-    "name": "hongbietcode"
-  },
-  "plugins": [
-    {
     "name": "synthetic-claude",
-      "source": "./",
-      "description": "Multi-agent debate with 3-phase workflow (Individual → Discussion → Synthesis)",
-      "version": "1.0.0",
-      "license": "MIT",
-      "keywords": ["multi-agent", "debate", "brainstorm", "synthetic"],
-      "category": "workflows",
-      "commands": ["./commands/debate.md"],
-      "agents": [
-        "./agents/debate-orchestrator.md",
-        "./agents/researcher.md",
-        "./agents/critic.md",
-        "./agents/synthesizer.md"
-      ],
-      "skills": ["./skills/debate-workflow"]
-    }
-  ]
+    "owner": {
+        "name": "hongbietcode"
+    },
+    "plugins": [
+        {
+            "name": "synthetic-claude",
+            "source": "./",
+            "description": "Multi-agent debate with 3-phase workflow (Individual → Discussion → Synthesis)",
+            "version": "1.0.0",
+            "license": "MIT",
+            "keywords": [
+                "multi-agent",
+                "debate",
+                "brainstorm",
+                "synthetic"
+            ],
+            "category": "workflows",
+            "commands": [
+                "./commands/debate.md"
+            ],
+            "agents": [
+                "./agents/debate-orchestrator.md",
+                "./agents/researcher.md",
+                "./agents/critic.md",
+                "./agents/synthesizer.md"
+            ],
+            "skills": [
+                "./skills/debate-workflow"
+            ]
+        }
+    ]
 }
