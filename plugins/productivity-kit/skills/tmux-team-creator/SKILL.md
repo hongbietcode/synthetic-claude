@@ -92,6 +92,7 @@ tmux list-panes -a -F '#{pane_id} #{pane_index} #{@role_name}' | grep $TMUX_PANE
 | Template | Best For | Roles | Key Features |
 |----------|----------|-------|--------------|
 | **scrum-team** | Standard Scrum projects | PO, SM, TL, BE, FE, QA | Full Scrum framework, SM owns process improvement, Sprint-based |
+| **scrum-minimal-team** | Small projects, MVPs | PO, SM, EX | Lightweight 3-person Scrum, EX combines TL+DEV+QA |
 | **game-dev-team** | Game development projects | PM, GD, FE, BE, QA | Game-focused with design→implementation flow |
 
 #### Research & Analysis Teams
@@ -105,6 +106,7 @@ tmux list-panes -a -F '#{pane_id} #{pane_index} #{@role_name}' | grep $TMUX_PANE
 
 **If user specifies:**
 - "Scrum team" / "standard Scrum" / "with Scrum Master" → Use `scrum-team`
+- "minimal Scrum" / "small team" / "solo dev" / "MVP" / "lightweight" → Use `scrum-minimal-team`
 - "game" / "game development" / "game project" → Use `game-dev-team`
 - "market research" / "competitive analysis" / "McKinsey" / "research team" → Use `mckinsey-research-team`
 - "consumer insights" / "P&G" / "brand strategy" / "emotional research" → Use `pg-insights-team`
@@ -135,7 +137,20 @@ Ask: "Which team template would you like to use?"
 
 **Best for:** Teams that want structured improvement, multiple sprints, quality focus
 
-#### 2. game-dev-team (Game Development)
+#### 2. scrum-minimal-team (Lightweight Scrum)
+
+**Roles:** PO (Product Owner), SM (Scrum Master), EX (Executive = TL + DEV + QA)
+
+**Key Features:**
+- Minimal overhead for small projects
+- EX combines architecture, development, and testing
+- Same Sprint-based workflow as full Scrum
+- SM still owns process improvement
+- 3-pane tmux layout
+
+**Best for:** Solo developers, MVPs, prototypes, personal projects wanting Scrum structure
+
+#### 3. game-dev-team (Game Development)
 
 **Roles:** DS (Game Designer), SM (Scrum Master), AR (Game Architect), DV (Game Developer), QA (Game QA)
 
@@ -154,7 +169,7 @@ Ask: "Which team template would you like to use?"
 
 **Best for:** Game development projects, interactive applications, real-time simulations
 
-#### 3. mckinsey-research-team (McKinsey-style research)
+#### 4. mckinsey-research-team (McKinsey-style research)
 
 **Roles:** EM (Engagement Manager), RL (Research Lead), PR (Primary Researcher), SR (Secondary Researcher), DA (Data Analyst), QR (Quality Reviewer)
 
@@ -176,7 +191,7 @@ Ask: "Which team template would you like to use?"
 
 **Best for:** Market research, competitive analysis, industry analysis, due diligence, strategy research
 
-#### 4. pg-insights-team (P&G-style consumer insights)
+#### 5. pg-insights-team (P&G-style consumer insights)
 
 **Roles:** IM (Insights Manager), MR (Moments Researcher), IA (Insight Analyst), SL (Strategy Lead), QR (Quality Reviewer)
 
@@ -669,7 +684,7 @@ Let the team self-coordinate. Trust PM to manage the sprint.
 
 ## Sample Team Reference
 
-The `sample_team/` directory contains 5 complete working templates (3 software development + 2 research):
+The `sample_team/` directory contains 6 complete working templates (4 software development + 2 research):
 
 ```
 sample_team/
@@ -690,6 +705,20 @@ sample_team/
 │       ├── BE_PROMPT.md             # Backend Developer
 │       ├── FE_PROMPT.md             # Frontend Developer
 │       └── QA_PROMPT.md             # Tester (black-box)
+│
+├── scrum-minimal-team/              # Lightweight 3-person Scrum
+│   ├── workflow.md                  # Minimal Scrum workflow
+│   ├── WHITEBOARD.md                # Sprint status
+│   ├── SPRINT_BACKLOG.md            # Current sprint items
+│   ├── PRODUCT_BACKLOG.md           # PO's backlog
+│   ├── setup-team.sh                # 3-pane setup
+│   ├── sm/                          # Scrum Master's workspace
+│   │   ├── IMPROVEMENT_BACKLOG.md   # Process issues
+│   │   └── RETROSPECTIVE_LOG.md     # Historical lessons
+│   └── prompts/
+│       ├── PO_PROMPT.md             # Product Owner
+│       ├── SM_PROMPT.md             # Scrum Master
+│       └── EX_PROMPT.md             # Executive (TL+DEV+QA)
 │
 ├── game-dev-team/                   # Game development team
 │   ├── workflow.md        # BMGD + Scrum workflow
@@ -751,14 +780,15 @@ sample_team/
 
 #### Software Development Teams
 
-| Feature | scrum-team | game-dev-team |
-|---------|------------|---------------|
-| Improvement Owner | SM (Scrum Master) | SM (Scrum Master) |
-| Workflow | Sprint-based | Design→Arch→Impl→Test |
-| Monitoring | 4 checkpoints + evidence log | Sprint-based improvement |
-| QA Approach | Black-box (QA role) | Automated tests + playtests (QA role) |
-| Backlog | Product + Sprint Backlog | WHITEBOARD |
-| Special Focus | Full Scrum framework | 60fps, playable increments |
+| Feature | scrum-team | scrum-minimal-team | game-dev-team |
+|---------|------------|-------------------|---------------|
+| Roles | 6 (PO, SM, TL, BE, FE, QA) | 3 (PO, SM, EX) | 5 (DS, SM, AR, DV, QA) |
+| Improvement Owner | SM | SM | SM |
+| Workflow | Sprint-based | Sprint-based | Design→Arch→Impl→Test |
+| Monitoring | 4 checkpoints + evidence log | Lightweight | Sprint-based improvement |
+| QA Approach | Black-box (QA role) | Integrated (EX role) | Automated tests + playtests |
+| Backlog | Product + Sprint | Product + Sprint | WHITEBOARD |
+| Best For | Large projects | Small/solo projects | Game development |
 
 #### Research Teams
 
@@ -893,8 +923,9 @@ To create a team for a new domain:
 | User Says | Use Template |
 |-----------|--------------|
 | "Scrum team" / "standard Scrum" / "Scrum Master" | `scrum-team` |
+| "minimal" / "small team" / "solo dev" / "MVP" / "lightweight" | `scrum-minimal-team` |
 | "game" / "game development" / "game project" | `game-dev-team` |
-| Nothing specified (software dev) | Ask, recommend `scrum-team` |
+| Nothing specified (software dev) | Ask, recommend `scrum-team` (or `scrum-minimal-team` for small projects) |
 
 #### Research & Analysis
 
