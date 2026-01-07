@@ -1,12 +1,12 @@
 ---
 name: debate-workflow
-description: Multi-agent debate with 3-phase workflow (Individual → Discussion → Synthesis)
+description: Multi-agent debate with 3-phase workflow. Optional --deep mode for feedback loop.
 license: MIT
 ---
 
 # Debate Workflow
 
-Multi-agent debate system with 3-phase workflow.
+Multi-agent debate system with 3-phase workflow. Optional deep mode with convergence-based feedback loop.
 
 ## When to Use
 
@@ -18,13 +18,20 @@ Activate this skill when:
 
 ## Core Concepts
 
-### 3-Phase Model
+### Standard Mode (default)
+```
+Phase 1 (Parallel) → Phase 2 (Parallel) → Phase 3
+```
 
+### Deep Mode (--deep flag)
 ```
-Phase 1: Individual    → Agents work independently (parallel)
-Phase 2: Discussion    → Agents critique each other
-Phase 3: Synthesis     → Consolidate into final answer
+Phase 1 → Phase 2 → Convergence Check ─┬─► (converged) → Phase 3
+                                       └─► (not converged) → Phase 2b → Phase 3
 ```
+
+**Usage:**
+- `/debate monolith vs microservices` → Standard 3-phase
+- `/debate monolith vs microservices --deep` → With feedback loop
 
 ### Agent Roles
 
@@ -34,61 +41,108 @@ Phase 3: Synthesis     → Consolidate into final answer
 | Critic | Risks, weaknesses | Skeptical, constructive |
 | Synthesizer | Patterns, integration | Balanced, practical |
 
-## Implementation Pattern
+## Deep Mode: Convergence Detection
 
-### Phase 1: Individual (Parallel Execution)
+**Only applies when using `--deep` flag.**
 
-```markdown
-Using Task tool, spawn 3 agents in parallel:
+### How It Works
 
-1. Task: "As Researcher, analyze: {topic}"
-2. Task: "As Critic, analyze: {topic}"
-3. Task: "As Synthesizer, analyze: {topic}"
+After Phase 2, compare the 3 KEY RECOMMENDATIONs from each agent.
 
-Collect all 3 responses.
+### Convergence Criteria (meet ANY)
+
+1. All 3 agents recommend same general direction
+2. 2 agents agree AND third acknowledges as valid
+3. All agree on decision framework
+
+### Convergence NOT Met If
+
+1. Agents recommend fundamentally opposing directions
+2. Key trade-offs still contested without resolution
+3. New concerns emerged that weren't addressed
+
+### Decision Flow
+
+| Condition | Action |
+|-----------|--------|
+| Converged | Proceed to Phase 3 |
+| Not converged | Execute Phase 2b (1 additional round) |
+| Max rounds reached | Proceed to Phase 3, note "Divergent" status |
+
+## Deep Mode: Feedback Loop (Phase 2b)
+
+Triggered only when convergence NOT met in deep mode. Each agent must:
+
+1. Address specific disagreement directly
+2. Either CONCEDE or provide STRONGER justification
+3. Propose path forward
+
+
+## Behavioral Contracts
+
+Each agent has constraints on what they MUST NOT do:
+
+| Agent | MUST NOT |
+|-------|----------|
+| Researcher | Conclude without evidence gaps; present speculation as fact |
+| Critic | Critique without mitigation; skip likelihood/impact estimates |
+| Synthesizer | Declare single best option; hide disagreements; force consensus |
+
+These contracts enforce genuine perspective diversity beyond stylistic variation.
+
+## Phase 2 Validation
+
+Before Phase 3, verify each agent:
+- [ ] Referenced at least 2 specific claims from other agents
+- [ ] Acknowledged at least 1 valid point they initially missed
+- [ ] Stated a KEY RECOMMENDATION
+- [ ] (Deep mode only) Convergence check was performed
+
+If validation fails: document in output, do not retry silently.
+
+## Error Handling
+
+| Scenario | Action |
+|----------|--------|
+| Agent Task fails | Note failure, continue with available responses |
+| Phase 2 validation fails | Document which requirements not met |
+| Agent doesn't follow format | Use available content, note deviation |
+| Convergence unclear | Default to Phase 2b (err on thoroughness) |
+| Max rounds reached | Proceed to Phase 3, mark as "Divergent" |
+
+## Prompt Isolation
+
+All agent prompts MUST include this preamble to prevent context confusion:
+
+```
+CONTEXT ISOLATION: This is a standalone debate exercise. IGNORE any repository, codebase, or file context. Focus ONLY on the debate topic below. Do NOT ask clarifying questions - just produce the requested analysis.
 ```
 
-### Phase 2: Discussion
-
-```markdown
-Share all Phase 1 responses with each agent:
-
-Task: "Review these perspectives and provide critique:
-- Researcher said: {response1}
-- Critic said: {response2}
-- Synthesizer said: {response3}
-
-As {agent}, respond to the other perspectives."
-```
-
-### Phase 3: Synthesis
-
-```markdown
-Consolidate all inputs:
-
-Task: "Based on this debate:
-- Individual perspectives: {phase1}
-- Discussion points: {phase2}
-
-Produce final synthesis with:
-1. Key insights
-2. Points of agreement
-3. Unresolved tensions
-4. Recommended action"
-```
+This prevents general-purpose subagents from getting distracted by repository context.
 
 ## Best Practices
 
-- Keep individual phase responses focused (~200 words each)
-- Discussion phase should directly reference others' points
+- Include CONTEXT ISOLATION preamble in all agent prompts
+- Discussion phase MUST directly reference others' points (mandatory citations)
 - Synthesis should acknowledge disagreements, not force consensus
 - Include actionable next steps in final output
+- Recommend decision frameworks, not decisions
+- Max 2 discussion rounds (Phase 2 + Phase 2b) - no infinite loops
 
-## Token Optimization
+## Model Configuration
+
+**Decision**: Use `model: haiku` for all agent Task calls.
+
+**Rationale**:
+- Cost efficiency (agent files specify haiku)
+- Sufficient for structured debate format
+
+**Override**: For complex topics requiring deeper analysis, orchestrator may use `model: sonnet` for Phase 3 synthesis only.
+
+## Execution
 
 - Use Task tool for parallel execution (faster)
-- Limit to 1 discussion round for most topics
-- Summarize between phases if context grows large
+- Feedback loop only triggered when agents diverge
 
 ## Output Template
 
@@ -105,11 +159,18 @@ Produce final synthesis with:
 
 {key exchanges and refinements}
 
+### Convergence Status
+
+**Rounds**: {1 or 2}
+**Status**: {Converged | Partially Converged | Divergent}
+**Key Agreement**: {what agents aligned on}
+**Remaining Tension**: {what still differs}
+
 ### Phase 3: Final Synthesis
 
 **Consensus**: {what all agree on}
 **Tensions**: {unresolved disagreements}
-**Recommendation**: {proposed action}
+**Decision Framework**: {how to decide, not what to decide}
 
 ### Next Steps
 - {action item 1}
