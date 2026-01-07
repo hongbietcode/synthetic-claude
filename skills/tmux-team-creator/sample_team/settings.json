@@ -1,0 +1,15 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$CLAUDE_PROJECT_DIR/.claude/hooks/post_compact_tmux_reminder.sh",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  }
+}

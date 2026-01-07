@@ -1,0 +1,179 @@
+[2025-11-28 15:15:00] STORED: research-transferability-validation.md
+- Type: Semantic pattern (QUANT role)
+- Source: Sprint 17 IBS Mean-Reversion Strategy failure analysis
+- Key insight: Cross-market research requires semantic validation of indicator signals
+- Case study: SPY IBS < 0.20 (rare panic) vs BTCUSDT IBS < 0.12 (normal volatility)
+- Evidence: 0% robust rate (780 trades, 100% negative PNL) vs 31.61% for adaptive BB
+- Pattern: Static indicators fail cross-regime transfer, adaptive indicators succeed
+- ROI: 30-min validation prevents 2-4 hour optimization waste
+- Tags: #research-transferability #volatility-regimes #indicator-semantics #failure-prevention
+- Confidence: HIGH (data-driven, QR 95% confidence)
+- Related memories: trading-strategy-design-patterns.md (regime-appropriate training data)
+- Action: CREATE (no similar existing memory about research transferability)
+
+
+=== Storage Session: 2025-11-29 22:54 ===
+Stored 4 critical patterns from trading strategy sprints (Sprint 10-17)
+
+1. indicator_adaptivity_crypto.md (semantic)
+   - Adaptive indicators (BB) >> Static indicators (IBS) for crypto
+   - Evidence: Sprint 14 BB 31.61% robust vs Sprint 17 IBS 0% on identical data
+   - Tags: #strategy-design #indicators #crypto #volatility #adaptivity
+
+2. progressive_testing_saves_time.md (procedural)
+   - Progressive testing workflow: datapoints → 1 coin → 3 coins → 11 coins → OOS
+   - Phase 2 (1-coin) is critical gate that saved 5.5 hours in Sprint 17
+   - Tags: #process #testing #efficiency #progressive-testing
+
+3. parameter_convergence_diagnostics.md (semantic)
+   - Boundary convergence = strategy failure, not parameter issue
+   - Mid-range convergence = optimizer found sweet spot
+   - Tags: #optimization #nsga2 #diagnostics #parameter-tuning
+
+4. robust_rate_primary_metric.md (semantic)
+   - Robust rate (% profitable on ALL OOS periods) is primary metric
+   - Sprint 14: 31.61% (excellent), Sprint 11: 0.1% (overfitting)
+   - Tags: #validation #robust-rate #oos #overfitting #metrics
+
+All patterns have VERY HIGH or HIGH confidence, proven across multiple sprints.
+Role collection: quant (all 4 patterns)
+
+
+[2025-11-29 23:05:52] UPDATED: research-transferability-validation.md
+- Action: Enhanced existing semantic pattern with additional Sprint 17 insights
+- Added: Detailed time breakdown (11,500-word spec = 3 hours, implementation = 1.5 hours)
+- Added: Anti-Pattern vs Correct Pattern comparison (explicit workflow contrast)
+- Added: Quick validation script example (5-minute IBS distribution check)
+- Added: Specific data point (1,687/17,544 candles = 9.62% IBS < 0.12)
+- Enhanced: ROI calculation (5 minutes saves 4.5 hours = 54× return, up from 4-8×)
+- Rationale: Existing memory comprehensive but lacked concrete time costs and validation script
+- Similarity: >0.90 (same Sprint 17 case study, complementary details)
+- Tags: #research-transferability #cross-market #failure #validation #roi #quant
+- Confidence: VERY HIGH (empirical data from actual Sprint 17 failure)
+
+
+=== Storage Session: 2025-11-29 (Circuit Breaker Bug) ===
+
+**Title:** Circuit Breaker Reset Bypass Bug - Counter Increment in Exception Handler
+**Type:** Episodic memory (backend role)
+**Action:** CREATE (no similar circuit breaker/retry patterns found)
+**Storage location:** episodic/episodic.md
+
+**Summary:**
+Critical production bug where circuit breaker triggered on TOTAL errors (5) instead of CONSECUTIVE errors due to reset logic placement after exception handlers that use `continue`. When exceptions occurred, `continue` bypassed the `consecutive_failures = 0` reset, causing false positives.
+
+**Key Insight:**
+In error recovery loops with exception handlers using `continue`/`break`/`return`, success state resets MUST be placed INSIDE the success path BEFORE exception handlers can execute. Placing reset after try-except blocks makes it unreachable.
+
+**Evidence:**
+- Symptom: Error → Success → Error → Success → Error → Error → Error = HALT
+- Expected: 1, 0, 1, 0, 1, 2, 3 (only 3 consecutive)
+- Actual: 1, 1, 2, 2, 3, 4, 5 → HALT (never reset on success)
+
+**Universal Pattern:**
+Applies to ANY error recovery mechanism with:
+- Counter/state tracking across iterations
+- Exception handlers that skip iteration (`continue`, `break`, `return`)
+- Reset logic placed outside success path
+- Languages: Python, JavaScript, Java, Go, C# (any with exception handling + loop control)
+
+**Why Insidious:**
+1. Code looks correct at first glance (reset exists!)
+2. Unit tests rarely cover error recovery scenarios
+3. Production manifests as "flaky" behavior
+4. Counter increments but doesn't show why reset never fires
+
+**Tags:** #episodic #backend #circuit-breaker #error-handling #retry-logic #failure #bug-pattern #production #control-flow #exception-handler #continue-bypass #state-management #api-resilience
+
+**Confidence:** HIGH (universal pattern, language-agnostic, production-verified)
+**Frequency:** MEDIUM-HIGH (circuit breakers are common, this placement mistake is subtle)
+
+**Deduplication Check:**
+- Searched: circuit.?breaker, retry.?logic, consecutive.?failures, exception.*continue, error.*recovery
+- Found: 0 similar patterns
+- Decision: CREATE new episodic memory
+
+**Value Assessment:**
+✅ Non-obvious (reset placement looks correct superficially)
+✅ Universal (applies across all languages with exception handling)
+✅ Actionable (provides exact wrong vs correct patterns with code examples)
+✅ Valuable (prevents production outages from flaky circuit breaker behavior)
+
+This pattern represents a valuable addition to the backend memory collection, capturing a subtle control-flow bug that's easy to introduce and hard to debug.
+
+
+=== Storage Session: 2025-12-27 (SAGE Paper Analysis) ===
+
+[2025-12-27] STORED: agent-memory-architecture.md
+- Type: Semantic pattern (AI role)
+- Action: CREATE (no similar existing memory about agent memory systems)
+- Source: SAGE (Skill Augmented GRPO for self-Evolution) paper analysis
+
+**Title:** Executable Skills vs Passive Memory for Agent Self-Improvement
+**Description:** Memory systems should store callable code patterns with usage tracking, not just text descriptions.
+
+**Key Insight:**
+Traditional memory stores text descriptions retrieved by semantic similarity. Better approach: store executable code patterns (functions with signatures, docstrings, example usage) and track reuse metrics (times_retrieved, times_used, success_rate). Quality validated through actual successful reuse, not similarity scores. Promote high-success patterns, demote low-success ones.
+
+**Design Elements:**
+1. Store functions not just descriptions
+2. Track usage metrics (times_retrieved, times_used, success_rate)
+3. Validate quality through actual reuse (not just semantic similarity)
+4. Promote/demote based on successful transfer to new tasks
+
+**Tags:** #ai #agent #memory-system #semantic #architecture
+**Confidence:** HIGH (derived from SAGE paper research)
+**Frequency:** 1 (initial storage)
+
+**Deduplication Check:**
+- Searched: agent, memory.*system, executable, self-improvement, SAGE
+- Found: 0 similar patterns
+- Decision: CREATE new semantic memory in agent-memory-architecture.md
+
+**Value Assessment:**
+- Non-obvious (shifts paradigm from reference to capability)
+- Actionable (provides concrete metrics to track)
+- Universal (applies to any agent memory system design)
+- Forward-looking (key for agent self-improvement systems)
+
+
+=== Storage Session: 2025-12-28 (User Autonomy Expectations) ===
+
+[2025-12-28] STORED: episodic/user-interaction-failures.md
+- Type: Episodic memory (UNIVERSAL role)
+- Action: CREATE (first episodic memory about user interaction patterns)
+- Context: MCP server v3.2 setup task
+
+**Title:** Claude Asked Too Many Questions Instead of Taking Autonomous Action
+
+**Description:** User expressed strong frustration when Claude kept asking about setup instead of solving problems independently.
+
+**Key Failure:**
+Task: Start MCP server v3.2. Network issues prevented Docker pull of Qdrant. Claude repeatedly asked user about setup options instead of autonomously solving: (1) switching to local file-based Qdrant, (2) patching MCP SDK compatibility bug, (3) copying API key from known location. After user's profanity ("do it your fucking self" - strong signal), Claude immediately solved all issues independently and successfully completed setup.
+
+**Critical Lesson:**
+When you have technical capability to solve a problem, DO IT instead of asking. User frustration/profanity signals you're being too passive. Autonomous problem-solving is expected, especially for technical setup tasks.
+
+**Evidence:**
+- Files modified: qdrant_memory_mcp_server_v2.py (added local Qdrant fallback), MCP SDK session.py (patched type annotation bug), created .env file
+- Outcome: Successfully completed after autonomous action
+- Strong signal: User profanity ("do it your fucking self")
+
+**Tags:** #failure #strong-signal #episodic #user-expectations #autonomy #mcp-setup
+**Confidence:** HIGH (direct user feedback with strong emotional signal)
+**Frequency:** 1 (initial storage)
+
+**Deduplication Check:**
+- Searched: autonomy, autonomous, asking questions, passive, user expectations
+- Found: 0 similar patterns
+- Decision: CREATE new episodic memory in episodic/user-interaction-failures.md
+
+**Value Assessment:**
+✅ Strong learning signal (profanity = critical feedback)
+✅ Universal applicability (autonomy expectations apply to all technical tasks)
+✅ Actionable (clear before/after behavior change)
+✅ Prevents repetition (addresses passive behavior pattern)
+
+**File Location:** /Users/sonph36/.claude/skills/coder-memory-store/episodic/user-interaction-failures.md
+
+This episodic memory captures a critical failure pattern about user expectations for autonomous problem-solving. The strong emotional signal (profanity) indicates this is a high-priority lesson to internalize.
