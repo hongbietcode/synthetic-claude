@@ -1,0 +1,31 @@
+{
+  "name": "content-creation",
+  "owner": { "name": "hongbietcode" },
+  "plugins": [{
+    "name": "content-creation",
+    "source": "./",
+    "description": "Content creation tools for prompting, documentation, and LLM applications",
+    "version": "1.0.0",
+    "license": "MIT",
+    "keywords": ["content", "prompting", "documentation", "llm", "templates"],
+    "category": "content",
+    "commands": [
+      "./commands/create-project-memory-skills.md",
+      "./commands/current-prompt-create.md",
+      "./commands/ecp.md",
+      "./commands/notebook-edit.md",
+      "./commands/py2notebook.md"
+    ],
+    "agents": [],
+    "skills": [
+      "./skills/prompting",
+      "./skills/doc-coauthoring",
+      "./skills/internal-comms",
+      "./skills/llm-apps-creator",
+      "./skills/power-agent-creator",
+      "./skills/web-artifacts-builder",
+      "./skills/templates"
+    ],
+    "strict": false
+  }]
+}

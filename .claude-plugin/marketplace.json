@@ -1,90 +1,60 @@
 {
-    "name": "synthetic-claude",
-    "owner": {
-        "name": "hongbietcode"
+  "name": "synthetic-claude",
+  "owner": { "name": "hongbietcode" },
+  "plugins": [
+    {
+      "name": "debate-system",
+      "source": "./plugins/debate-system",
+      "description": "Multi-agent debate system with 3-phase workflow and deep mode for convergence feedback",
+      "version": "1.0.0",
+      "license": "MIT",
+      "keywords": ["multi-agent", "debate", "analysis", "decision-making", "brainstorm"],
+      "category": "workflows"
     },
-    "plugins": [
-        {
-            "name": "synthetic-claude",
-            "source": "./",
-            "description": "Multi-agent debate with 3-phase workflow plus productivity tools, document processing, and UI/UX skills",
-            "version": "2.0.0",
-            "license": "MIT",
-            "keywords": [
-                "multi-agent",
-                "debate",
-                "brainstorm",
-                "synthetic",
-                "pdf",
-                "docx",
-                "pptx",
-                "skills",
-                "productivity"
-            ],
-            "category": "workflows",
-            "commands": [
-                "./commands/debate.md",
-                "./commands/create-project-memory-skills.md",
-                "./commands/current-prompt-create.md",
-                "./commands/design-guide.md",
-                "./commands/discuss.md",
-                "./commands/ecp.md",
-                "./commands/explore-external-APIs.md",
-                "./commands/fastapi-test.md",
-                "./commands/gen-feature-docs.md",
-                "./commands/generate-db-docs.md",
-                "./commands/git-configure.md",
-                "./commands/integrate-parallel-work.md",
-                "./commands/notebook-edit.md",
-                "./commands/parallel-work.md",
-                "./commands/px-backend-api.md",
-                "./commands/px-frontend-api.md",
-                "./commands/py2notebook.md",
-                "./commands/quick-brainstorm.md",
-                "./commands/refactor-interactive.md",
-                "./commands/think-hard.md",
-                "./commands/tidy-docs.md",
-                "./commands/tidy-up.md",
-                "./commands/tmux-team-restart.md"
-            ],
-            "agents": [
-                "./agents/debate-orchestrator.md",
-                "./agents/researcher.md",
-                "./agents/critic.md",
-                "./agents/synthesizer.md",
-                "./agents/critical-code-reviewer.md",
-                "./agents/research-assistant.md",
-                "./agents/ui-ux-designer.md"
-            ],
-            "skills": [
-                "./skills/debate-workflow",
-                "./skills/algorithmic-art",
-                "./skills/brand-guidelines",
-                "./skills/canvas-design",
-                "./skills/cc-hooks-creator",
-                "./skills/coder-memory-recall",
-                "./skills/coder-memory-store",
-                "./skills/doc-coauthoring",
-                "./skills/docx",
-                "./skills/frontend-design",
-                "./skills/internal-comms",
-                "./skills/llm-apps-creator",
-                "./skills/mcp-builder",
-                "./skills/pdf",
-                "./skills/power-agent-creator",
-                "./skills/pptx",
-                "./skills/prompting",
-                "./skills/quick-research",
-                "./skills/skill-creator",
-                "./skills/slack-gif-creator",
-                "./skills/templates",
-                "./skills/theme-factory",
-                "./skills/tmux-team-creator",
-                "./skills/web-artifacts-builder",
-                "./skills/webapp-testing",
-                "./skills/xlsx"
-            ],
-            "strict": false
-        }
-    ]
+    {
+      "name": "document-suite",
+      "source": "./plugins/document-suite",
+      "description": "Document processing skills for PDF, DOCX, PPTX, and XLSX files",
+      "version": "1.0.0",
+      "license": "MIT",
+      "keywords": ["pdf", "docx", "pptx", "xlsx", "documents", "office"],
+      "category": "documents"
+    },
+    {
+      "name": "dev-tools",
+      "source": "./plugins/dev-tools",
+      "description": "Development tools for API implementation, testing, and code review",
+      "version": "1.0.0",
+      "license": "MIT",
+      "keywords": ["api", "backend", "frontend", "testing", "code-review", "mcp"],
+      "category": "development"
+    },
+    {
+      "name": "design-studio",
+      "source": "./plugins/design-studio",
+      "description": "Design tools for UI/UX, frontend design, and visual assets",
+      "version": "1.0.0",
+      "license": "MIT",
+      "keywords": ["design", "ui-ux", "frontend", "canvas", "art", "branding"],
+      "category": "design"
+    },
+    {
+      "name": "productivity-kit",
+      "source": "./plugins/productivity-kit",
+      "description": "Productivity tools for project management, refactoring, and research",
+      "version": "1.0.0",
+      "license": "MIT",
+      "keywords": ["productivity", "git", "refactor", "research", "tmux", "memory"],
+      "category": "productivity"
+    },
+    {
+      "name": "content-creation",
+      "source": "./plugins/content-creation",
+      "description": "Content creation tools for prompting, documentation, and LLM applications",
+      "version": "1.0.0",
+      "license": "MIT",
+      "keywords": ["content", "prompting", "documentation", "llm", "templates"],
+      "category": "content"
+    }
+  ]
 }

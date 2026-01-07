@@ -2,15 +2,15 @@
 
 ## Project Overview
 
-**Synthetic Claude** is an extensible Claude Code marketplace plugin featuring:
-- Multi-agent debate system (3-phase with optional deep mode)
-- 7 specialized agents for different roles
-- 23 productivity commands
-- 26 reusable skills
-- Full document processing (PDF, DOCX, PPTX, XLSX)
-- Plugin marketplace integration
+**Synthetic Claude** is a modular Claude Code marketplace with 6 specialized plugins:
+- Multi-agent debate system with 3-phase workflow
+- Document processing (PDF, DOCX, PPTX, XLSX)
+- Development tools (API, testing, code review, documentation)
+- Design tools (UI/UX, frontend, visual assets)
+- Productivity tools (project management, refactoring, research)
+- Content creation tools (prompting, documentation, LLM apps)
 
-**Version:** 2.0.0 | **License:** MIT
+**Version:** 1.0.0 (6 plugins × v1.0.0 each) | **License:** MIT
 
 **Repository:** `/Users/huutri/code/synthetic-claude`
 
@@ -18,378 +18,400 @@
 
 ```
 synthetic-claude/
-├── .claude/                     # Claude Code configuration
-│   └── settings.json           # IDE settings
-├── .claude-plugin/             # Plugin metadata
-│   └── marketplace.json        # Component registry
-├── agents/                     # AI agents (7 total)
-├── commands/                   # User commands (23 total)
-├── skills/                     # Reusable capabilities (26 total)
-├── docs/                       # Technical documentation
-├── plans/                      # Project planning & reports
-├── README.md                   # User-facing documentation
-└── repomix-output.xml         # Codebase snapshot
+├── .claude-plugin/                 # Root aggregator marketplace
+│   └── marketplace.json            # References 6 plugins
+├── plugins/                        # 6 modular plugins
+│   ├── debate-system/
+│   │   ├── .claude-plugin/
+│   │   │   └── marketplace.json
+│   │   ├── agents/ (4 files)
+│   │   ├── commands/ (4 files)
+│   │   └── skills/
+│   │       └── debate-workflow/
+│   ├── document-suite/
+│   │   ├── .claude-plugin/
+│   │   │   └── marketplace.json
+│   │   └── skills/ (pdf, docx, pptx, xlsx)
+│   ├── dev-tools/
+│   │   ├── .claude-plugin/
+│   │   │   └── marketplace.json
+│   │   ├── agents/ (critical-code-reviewer)
+│   │   ├── commands/ (6 files)
+│   │   └── skills/ (4 dirs)
+│   ├── design-studio/
+│   │   ├── .claude-plugin/
+│   │   │   └── marketplace.json
+│   │   ├── agents/ (ui-ux-designer)
+│   │   ├── commands/ (design-guide)
+│   │   └── skills/ (6 dirs)
+│   ├── productivity-kit/
+│   │   ├── .claude-plugin/
+│   │   │   └── marketplace.json
+│   │   ├── agents/ (research-assistant)
+│   │   ├── commands/ (7 files)
+│   │   └── skills/ (4 dirs)
+│   └── content-creation/
+│       ├── .claude-plugin/
+│       │   └── marketplace.json
+│       ├── commands/ (5 files)
+│       └── skills/ (7 dirs)
+├── docs/                           # Technical documentation
+│   ├── project-overview-pdr.md
+│   ├── code-standards.md
+│   ├── codebase-summary.md (this file)
+│   ├── system-architecture.md
+│   └── project-roadmap.md
+├── README.md                       # User documentation
+└── repomix-output.xml             # Codebase snapshot
 ```
 
-## Agents (7)
+## Marketplace Architecture
 
-All agents use YAML frontmatter + markdown format. Model: `haiku` (cost efficiency).
+### Root Aggregator
+**File:** `.claude-plugin/marketplace.json`
 
-| Agent ID | File | Purpose | Role |
-|----------|------|---------|------|
-| `debate-orchestrator` | `agents/debate-orchestrator.md` | Coordinates multi-phase debate workflow | Master orchestrator |
-| `debate-researcher` | `agents/researcher.md` | Gathers evidence, explores possibilities | Evidence-focused |
-| `debate-critic` | `agents/critic.md` | Identifies risks, challenges assumptions | Risk-focused |
-| `debate-synthesizer` | `agents/synthesizer.md` | Finds patterns, integrates perspectives | Integration-focused |
-| `critical-code-reviewer` | `agents/critical-code-reviewer.md` | Reviews code for critical issues | Code QA |
-| `research-assistant` | `agents/research-assistant.md` | Conducts research, gathers external info | Research |
-| `ui-ux-designer` | `agents/ui-ux-designer.md` | Provides design guidance and UX review | Design |
+The root marketplace is an **aggregator** that references 6 independent plugins:
 
-### Agent Structure (YAML Frontmatter)
+| Plugin | Source | Category | Version |
+|--------|--------|----------|---------|
+| debate-system | `./plugins/debate-system` | workflows | 1.0.0 |
+| document-suite | `./plugins/document-suite` | documents | 1.0.0 |
+| dev-tools | `./plugins/dev-tools` | development | 1.0.0 |
+| design-studio | `./plugins/design-studio` | design | 1.0.0 |
+| productivity-kit | `./plugins/productivity-kit` | productivity | 1.0.0 |
+| content-creation | `./plugins/content-creation` | content | 1.0.0 |
 
-```yaml
----
-name: agent-id                  # Kebab-case identifier
-description: >-                 # One-line user description
-  [Optional example block]
-model: haiku                    # Always haiku for cost
----
+### Individual Plugins
+Each plugin has its own marketplace.json at `plugins/{name}/.claude-plugin/marketplace.json` with:
+- Own agents, commands, skills declarations
+- Local paths (`./` prefix)
+- Version 1.0.0
+- Strict: false
 
-[Markdown instructions and behavioral standards]
+## Plugin Inventory
+
+### 1. Debate System
+**Path:** `plugins/debate-system/`
+**Category:** workflows
+**Version:** 1.0.0
+
+**Agents (4):**
+| Agent | File | Purpose |
+|-------|------|---------|
+| debate-orchestrator | agents/debate-orchestrator.md | Coordinates 3-phase debate |
+| researcher | agents/researcher.md | Gathers evidence |
+| critic | agents/critic.md | Identifies risks |
+| synthesizer | agents/synthesizer.md | Integrates perspectives |
+
+**Commands (4):**
+| Command | File | Purpose |
+|---------|------|---------|
+| /debate | commands/debate.md | Multi-agent debate with --deep mode |
+| /quick-brainstorm | commands/quick-brainstorm.md | Rapid ideation with counter-arguments |
+| /discuss | commands/discuss.md | Quick discussion with critical analysis |
+| /think-hard | commands/think-hard.md | Challenge assumptions |
+
+**Skills (1):**
+| Skill | Directory | Purpose |
+|-------|-----------|---------|
+| debate-workflow | skills/debate-workflow/ | 3-phase orchestration |
+
+### 2. Document Suite
+**Path:** `plugins/document-suite/`
+**Category:** documents
+**Version:** 1.0.0
+
+**Skills (4):**
+| Skill | Directory | Purpose |
+|-------|-----------|---------|
+| pdf | skills/pdf/ | PDF extraction, analysis, transformation |
+| docx | skills/docx/ | Word document creation/modification |
+| pptx | skills/pptx/ | PowerPoint presentation generation |
+| xlsx | skills/xlsx/ | Excel spreadsheet creation |
+
+### 3. Dev Tools
+**Path:** `plugins/dev-tools/`
+**Category:** development
+**Version:** 1.0.0
+
+**Agents (1):**
+| Agent | File | Purpose |
+|-------|------|---------|
+| critical-code-reviewer | agents/critical-code-reviewer.md | Code quality review |
+
+**Commands (6):**
+| Command | File | Purpose |
+|---------|------|---------|
+| /px-backend-api | commands/px-backend-api.md | Implement backend APIs |
+| /px-frontend-api | commands/px-frontend-api.md | Frontend integration |
+| /fastapi-test | commands/fastapi-test.md | API test generation |
+| /explore-external-APIs | commands/explore-external-APIs.md | API testing & docs |
+| /gen-feature-docs | commands/gen-feature-docs.md | Developer + user docs |
+| /generate-db-docs | commands/generate-db-docs.md | Database documentation |
+
+**Skills (4):**
+| Skill | Directory | Purpose |
+|-------|-----------|---------|
+| webapp-testing | skills/webapp-testing/ | Web app testing framework |
+| mcp-builder | skills/mcp-builder/ | MCP server builder |
+| skill-creator | skills/skill-creator/ | Scaffold new skills |
+| cc-hooks-creator | skills/cc-hooks-creator/ | Claude Code hooks |
+
+### 4. Design Studio
+**Path:** `plugins/design-studio/`
+**Category:** design
+**Version:** 1.0.0
+
+**Agents (1):**
+| Agent | File | Purpose |
+|-------|------|---------|
+| ui-ux-designer | agents/ui-ux-designer.md | Design guidance & UX review |
+
+**Commands (1):**
+| Command | File | Purpose |
+|---------|------|---------|
+| /design-guide | commands/design-guide.md | Design analysis without code changes |
+
+**Skills (6):**
+| Skill | Directory | Purpose |
+|-------|-----------|---------|
+| frontend-design | skills/frontend-design/ | Design system & components |
+| canvas-design | skills/canvas-design/ | Canvas-based visual design |
+| algorithmic-art | skills/algorithmic-art/ | Algorithmic art generation |
+| theme-factory | skills/theme-factory/ | Theme generation engine |
+| brand-guidelines | skills/brand-guidelines/ | Brand identity management |
+| slack-gif-creator | skills/slack-gif-creator/ | Animated GIF creation |
+
+### 5. Productivity Kit
+**Path:** `plugins/productivity-kit/`
+**Category:** productivity
+**Version:** 1.0.0
+
+**Agents (1):**
+| Agent | File | Purpose |
+|-------|------|---------|
+| research-assistant | agents/research-assistant.md | Research & external info |
+
+**Commands (7):**
+| Command | File | Purpose |
+|---------|------|---------|
+| /parallel-work | commands/parallel-work.md | Git worktree setup |
+| /integrate-parallel-work | commands/integrate-parallel-work.md | Merge parallel features |
+| /refactor-interactive | commands/refactor-interactive.md | Guided refactoring |
+| /tidy-up | commands/tidy-up.md | Project structure cleanup |
+| /tidy-docs | commands/tidy-docs.md | Documentation reorganization |
+| /git-configure | commands/git-configure.md | Git user configuration |
+| /tmux-team-restart | commands/tmux-team-restart.md | tmux team environment |
+
+**Skills (4):**
+| Skill | Directory | Purpose |
+|-------|-----------|---------|
+| quick-research | skills/quick-research/ | Fast research capabilities |
+| tmux-team-creator | skills/tmux-team-creator/ | tmux environment creation |
+| coder-memory-store | skills/coder-memory-store/ | Store code memory |
+| coder-memory-recall | skills/coder-memory-recall/ | Recall code memory |
+
+### 6. Content Creation
+**Path:** `plugins/content-creation/`
+**Category:** content
+**Version:** 1.0.0
+
+**Commands (5):**
+| Command | File | Purpose |
+|---------|------|---------|
+| /create-project-memory-skills | commands/create-project-memory-skills.md | Copy memory skills |
+| /current-prompt-create | commands/current-prompt-create.md | Create current_prompt.md |
+| /ecp | commands/ecp.md | Execute prompt from file |
+| /notebook-edit | commands/notebook-edit.md | Jupyter notebook changes |
+| /py2notebook | commands/py2notebook.md | Python to notebook |
+
+**Skills (7):**
+| Skill | Directory | Purpose |
+|-------|-----------|---------|
+| prompting | skills/prompting/ | Prompting best practices |
+| doc-coauthoring | skills/doc-coauthoring/ | Collaborative documentation |
+| internal-comms | skills/internal-comms/ | Internal communication |
+| llm-apps-creator | skills/llm-apps-creator/ | LLM application creation |
+| power-agent-creator | skills/power-agent-creator/ | Powerful agent creation |
+| web-artifacts-builder | skills/web-artifacts-builder/ | Web artifacts builder |
+| templates | skills/templates/ | Reusable templates |
+
+## Component Summary
+
+| Category | Count | Details |
+|----------|-------|---------|
+| **Plugins** | 6 | Each v1.0.0, independently installable |
+| **Agents** | 7 | Distributed: debate(4), dev(1), design(1), productivity(1) |
+| **Commands** | 23 | Distributed: debate(4), dev(6), design(1), prod(7), content(5) |
+| **Skills** | 26 | Distributed: debate(1), docs(4), dev(4), design(6), prod(4), content(7) |
+| **Marketplaces** | 7 | 1 root aggregator + 6 plugin marketplaces |
+
+## Installation Model
+
+### Aggregator Method (Recommended)
+Add the root marketplace and install individual plugins:
+```bash
+/plugin marketplace add hongbietcode/synthetic-claude
+/plugin install synthetic-claude@debate-system
+/plugin install synthetic-claude@document-suite
+# Install only plugins you need
 ```
 
-### Key Sections in Each Agent
-
-1. **Role** - Primary responsibility
-2. **Behavioral Standards** - Expected behavior patterns
-3. **Behavioral Contract (MUST NOT)** - Anti-patterns to avoid
-4. **Output Format** - Exact markdown structure to produce
-5. **Discussion Phase Output** - How agent responds to others
-
-### Debate Workflow (debate-orchestrator)
-
-The orchestrator coordinates 3-phase debate:
-
-1. **Phase 1 (Parallel)** - Each agent independently analyzes topic
-2. **Phase 2 (Parallel)** - Each agent references others, updates position
-3. **Deep Mode Convergence Check** - Compare KEY RECOMMENDATIONs
-   - If converged → Proceed to Phase 3
-   - If diverged → Execute Phase 2b (second discussion)
-4. **Phase 3 (Serial)** - Synthesizer creates final recommendation
-
-## Commands (23)
-
-All commands use YAML frontmatter + markdown format.
-
-### Debate & Analysis Commands
-
-| Command | File | Purpose |
-|---------|------|---------|
-| `/debate` | `commands/debate.md` | Multi-agent debate with optional --deep mode |
-| `/quick-brainstorm` | `commands/quick-brainstorm.md` | Rapid ideation with counter-arguments |
-| `/discuss` | `commands/discuss.md` | Quick discussion with critical analysis |
-| `/think-hard` | `commands/think-hard.md` | Challenge assumptions and find gaps |
-
-### Development Commands
-
-| Command | File | Purpose |
-|---------|------|---------|
-| `/px-backend-api` | `commands/px-backend-api.md` | Implement backend APIs from specs |
-| `/px-frontend-api` | `commands/px-frontend-api.md` | Frontend integration with backend |
-| `/design-guide` | `commands/design-guide.md` | Design analysis without modifying code |
-| `/gen-feature-docs` | `commands/gen-feature-docs.md` | Generate developer + user docs |
-| `/generate-db-docs` | `commands/generate-db-docs.md` | Create database documentation |
-| `/explore-external-APIs` | `commands/explore-external-APIs.md` | Test and document APIs |
-| `/fastapi-test` | `commands/fastapi-test.md` | Create comprehensive API tests |
-
-### Project Management Commands
-
-| Command | File | Purpose |
-|---------|------|---------|
-| `/parallel-work` | `commands/parallel-work.md` | Setup Git worktrees for feature dev |
-| `/integrate-parallel-work` | `commands/integrate-parallel-work.md` | Merge parallel features |
-| `/refactor-interactive` | `commands/refactor-interactive.md` | Guided refactoring with steps |
-| `/tidy-up` | `commands/tidy-up.md` | Cleanup project structure |
-| `/tidy-docs` | `commands/tidy-docs.md` | Reorganize documentation |
-| `/git-configure` | `commands/git-configure.md` | Configure Git user (personal/work) |
-
-### Support Commands
-
-| Command | File | Purpose |
-|---------|------|---------|
-| `/create-project-memory-skills` | `commands/create-project-memory-skills.md` | Copy memory skills to project |
-| `/notebook-edit` | `commands/notebook-edit.md` | Suggest Jupyter notebook changes |
-| `/py2notebook` | `commands/py2notebook.md` | Convert Python to notebook |
-| `/ecp` | `commands/ecp.md` | Execute prompt from file |
-| `/tmux-team-restart` | `commands/tmux-team-restart.md` | Restart tmux with state preservation |
-| `/current-prompt-create` | `commands/current-prompt-create.md` | Create current_prompt.md |
-
-### Command Structure (YAML Frontmatter)
-
-```yaml
----
-description: User-facing one-liner
-argument-hint: [param1] [param2] [--flag]
-allowed-tools: [Tool1, Tool2]    # Optional restrictions
----
-
-[Markdown content using $ARGUMENTS, $FILES, $CONCERNS variables]
+### Direct Plugin Method
+Install plugins directly if using as template:
+```bash
+/plugin install path/to/debate-system
+/plugin install path/to/document-suite
+# Works for local/custom plugins
 ```
 
-## Skills (26)
+### Scope Selection
+Each installation supports three scopes:
+- `--scope user` - Global access (default)
+- `--scope project` - Version controlled in `.claude/plugins/`
+- `--scope local` - Machine-local, not version controlled
 
-All skills are directories with YAML frontmatter + markdown documentation.
+## File Format Standards
 
-### Core Debate System
+### YAML Frontmatter + Markdown Pattern
 
-| Skill | Directory | Purpose |
-|-------|-----------|---------|
-| `debate-workflow` | `skills/debate-workflow/` | Core 3-phase debate orchestration |
-
-### Document Processing
-
-| Skill | Directory | Purpose |
-|-------|-----------|---------|
-| `pdf` | `skills/pdf/` | PDF extraction, analysis, transformation |
-| `docx` | `skills/docx/` | Word document creation/modification |
-| `pptx` | `skills/pptx/` | PowerPoint presentation generation |
-| `xlsx` | `skills/xlsx/` | Excel spreadsheet creation |
-
-### Development & Code
-
-| Skill | Directory | Purpose |
-|-------|-----------|---------|
-| `skill-creator` | `skills/skill-creator/` | Scaffold new skills |
-| `mcp-builder` | `skills/mcp-builder/` | Build MCP servers |
-| `coder-memory-store` | `skills/coder-memory-store/` | Store code memory for recall |
-| `coder-memory-recall` | `skills/coder-memory-recall/` | Recall stored code memory |
-| `webapp-testing` | `skills/webapp-testing/` | Web app testing framework |
-
-### Design & Frontend
-
-| Skill | Directory | Purpose |
-|-------|-----------|---------|
-| `frontend-design` | `skills/frontend-design/` | Design system and components |
-| `canvas-design` | `skills/canvas-design/` | Canvas-based visual design |
-| `algorithmic-art` | `skills/algorithmic-art/` | Generate algorithmic art |
-| `theme-factory` | `skills/theme-factory/` | Theme generation engine |
-| `slack-gif-creator` | `skills/slack-gif-creator/` | Create animated GIFs |
-
-### Content & Communication
-
-| Skill | Directory | Purpose |
-|-------|-----------|---------|
-| `internal-comms` | `skills/internal-comms/` | Internal communication templates |
-| `doc-coauthoring` | `skills/doc-coauthoring/` | Collaborative documentation |
-| `prompting` | `skills/prompting/` | Prompting best practices |
-| `brand-guidelines` | `skills/brand-guidelines/` | Brand identity management |
-
-### Specialized Tools
-
-| Skill | Directory | Purpose |
-|-------|-----------|---------|
-| `quick-research` | `skills/quick-research/` | Fast research capabilities |
-| `llm-apps-creator` | `skills/llm-apps-creator/` | Create LLM applications |
-| `power-agent-creator` | `skills/power-agent-creator/` | Create powerful agents |
-| `cc-hooks-creator` | `skills/cc-hooks-creator/` | Create Claude Code hooks |
-| `tmux-team-creator` | `skills/tmux-team-creator/` | Create tmux team environment |
-| `web-artifacts-builder` | `skills/web-artifacts-builder/` | Build web artifacts |
-| `templates` | `skills/templates/` | Reusable templates |
-
-### Skill Structure (YAML Frontmatter)
-
+**Agents & Commands:**
 ```yaml
 ---
-name: skill-name                # Kebab-case identifier
+name: identifier (kebab-case)
+description: One-liner (user-facing)
+model: haiku (agents only)
+---
+
+# Markdown content
+[Implementation details]
+```
+
+**Skills:**
+```yaml
+---
+name: skill-name (kebab-case)
 description: One-line purpose
 license: MIT
 ---
 
-[Markdown documentation]
-
-## When to Use
-[Activation criteria]
-
-## Core Concepts
-[Key ideas]
-
-## Usage
-[How to invoke/use]
+# {Skill Name}
+[Documentation and usage]
 ```
 
-### Skill Directory Layout
-
-```
-skills/{skill-name}/
-├── SKILL.md                     # Documentation
-├── scripts/
-│   ├── {script1}.js            # JavaScript implementations
-│   ├── {script2}.py            # Python implementations
-│   └── references/             # External tools/specs
-└── references/                 # Optional external docs
-```
-
-## Configuration
-
-### marketplace.json
-
-Located at `.claude-plugin/marketplace.json`, this file registers all components:
-
-```json
-{
-  "name": "synthetic-claude",
-  "owner": { "name": "hongbietcode" },
-  "plugins": [{
-    "name": "synthetic-claude",
-    "source": "./",
-    "description": "Multi-agent debate...",
-    "version": "2.0.0",
-    "license": "MIT",
-    "keywords": ["multi-agent", "debate", ...],
-    "category": "workflows",
-    "commands": ["./commands/..."],
-    "agents": ["./agents/..."],
-    "skills": ["./skills/..."],
-    "strict": false
-  }]
-}
-```
-
-**Key fields:**
-- `strict: false` - Allows installation without plugin.json in skill dirs
-- `commands[]` - Paths to all 23 command files
-- `agents[]` - Paths to all 7 agent files
-- `skills[]` - Paths to all 26 skill directories
+### Naming Conventions
+- **Directories:** kebab-case (e.g., `debate-system`, `dev-tools`)
+- **Files:** kebab-case.md (e.g., `debate.md`, `px-backend-api.md`)
+- **Identifiers:** kebab-case (e.g., `debate-orchestrator`, `research-assistant`)
+- **Marketplace categories:** workflows, documents, development, design, productivity, content
 
 ## File Statistics
 
-| Category | Count | Total Tokens | Status |
-|----------|-------|--------------|--------|
+| Component | Count | Approximate Tokens | Status |
+|-----------|-------|-------------------|--------|
 | Agents | 7 | ~15,000 | Complete |
 | Commands | 23 | ~80,000 | Complete |
-| Skills | 26 | ~950,000 | Complete (includes schemas) |
-| Documentation | 6 docs | ~12,000 | Complete |
-| **Total** | **62 components** | **~1,045,663** | v2.0.0 |
-
-## Installation Scopes
-
-Plugin supports three installation scopes:
-
-| Scope | Location | Visibility | Use Case |
-|-------|----------|-----------|----------|
-| **user** | Global Claude Code config | All projects | Personal library |
-| **project** | `.claude/plugins/` | Team in version control | Team-shared workflows |
-| **local** | Project local config | Current machine only | Project-specific overrides |
-
-**Priority:** Local > Project > User
-
-## Documentation Structure
-
-| Document | Purpose | Audience |
-|----------|---------|----------|
-| `README.md` | User guide, installation, usage | All users |
-| `docs/project-overview-pdr.md` | Vision, goals, requirements | Team leads, architects |
-| `docs/code-standards.md` | File formats, naming, patterns | Contributors |
-| `docs/system-architecture.md` | Plugin structure, data flow | Technical leads |
-| `docs/codebase-summary.md` | Inventory, structure (this file) | Developers |
-| `docs/project-roadmap.md` | Current state, future plans | Team |
+| Skills | 26 | ~950,000 | Complete |
+| Documentation | 5 docs | ~12,000 | Complete |
+| Marketplaces | 7 files | ~5,000 | Complete |
+| **Total** | **68 components** | **~1,062,000** | v1.0.0 |
 
 ## Key Design Patterns
 
-### 1. YAML-First Configuration
-- Behavior declarative in YAML frontmatter
-- Implementation in markdown
-- Machine-readable, human-understandable
+### 1. Plugin Modularity
+- Each plugin is independently installable
+- No inter-plugin dependencies
+- Selective installation reduces context usage
+- Aggregator pattern enables unified discovery
 
-### 2. Context Isolation
-- Each agent receives CONTEXT ISOLATION preamble
+### 2. YAML-First Configuration
+- Declarative behavior in frontmatter
+- Machine-readable, human-editable
+- Version and metadata centralized
+
+### 3. Context Isolation
+- Agents include CONTEXT ISOLATION preamble
 - Prevents cross-agent contamination
-- Ensures independence in Phase 1
-
-### 3. Key Recommendation Tracking
-- Each agent outputs KEY RECOMMENDATION field
-- Enables convergence detection in deep mode
-- Critical for Phase 2 → Phase 3 decision
+- Ensures independent Phase 1 analysis
 
 ### 4. Stateless Execution
-- No persistent state between commands
+- No persistent state between sessions
 - Reproducible results
 - Safe sandbox operation
 
 ### 5. Skill Composition
-- Agents/commands declare needed skills
-- Skills auto-activate when referenced
+- Agents/commands reference skills declaratively
+- Skills auto-activate when called
 - Modular, extensible architecture
 
 ## Development Workflow
 
-### Adding a New Agent
+### Adding a Component to a Plugin
 
-1. Create `agents/{agent-name}.md`
-2. Include YAML frontmatter (name, description, model)
-3. Add Role, Behavioral Standards, Output Format sections
-4. Add entry to `marketplace.json`
-5. Test behavior in isolation
+**1. New Agent:**
+```bash
+# File: plugins/{plugin}/agents/{name}.md
+# Include YAML frontmatter with name, description, model
+# Add Role, Behavioral Standards, Output Format sections
+# Update: plugins/{plugin}/.claude-plugin/marketplace.json
+```
 
-### Adding a New Command
+**2. New Command:**
+```bash
+# File: plugins/{plugin}/commands/{name}.md
+# Include YAML frontmatter with description, argument-hint
+# Add Process, Output, Examples sections
+# Update: plugins/{plugin}/.claude-plugin/marketplace.json
+```
 
-1. Create `commands/{command-name}.md`
-2. Include YAML frontmatter (description, argument-hint)
-3. Add Process, Output, Examples sections
-4. Use `$ARGUMENTS`, `$FILES` variables as needed
-5. Add entry to `marketplace.json`
-6. Test with sample inputs
-
-### Adding a New Skill
-
-1. Create `skills/{skill-name}/` directory
-2. Create `SKILL.md` with YAML frontmatter
-3. Add scripts to `scripts/` subdirectory
-4. Add references as needed
-5. Add entry to `marketplace.json`
-6. Test skill invocation from agent/command
+**3. New Skill:**
+```bash
+# Directory: plugins/{plugin}/skills/{skill-name}/
+# Create: SKILL.md with YAML frontmatter
+# Create: scripts/ subdirectory for implementation
+# Update: plugins/{plugin}/.claude-plugin/marketplace.json
+```
 
 ### Testing
-
 - Agents: Solo output, discussion response, edge cases
 - Commands: Valid input, missing args, invalid input
 - Skills: Initialization, output format, error handling
-- Integration: Cross-component workflows
 
 ## Performance Characteristics
 
 ### Latency
-- **Phase 1:** 15-20s (3 parallel agents)
-- **Phase 2:** 15-20s (3 parallel agents)
-- **Phase 3:** 10-15s (serial synthesis)
-- **Standard mode total:** 40-55s
+- **Phase 1 (3 parallel agents):** 15-20s
+- **Phase 2 (3 parallel agents):** 15-20s
+- **Phase 3 (serial synthesis):** 10-15s
+- **Standard debate total:** 40-55s
 - **Deep mode (converged):** 40-55s
-- **Deep mode (diverged):** 70-90s (additional Phase 2b)
+- **Deep mode (diverged):** 70-90s (second Phase 2b)
 
 ### Token Usage
 - **Per debate:** ~2000-3000 tokens (Haiku model)
-- **Per skill:** Varies (pdf ~500-1000, docx ~1000-2000)
-- **Cost efficiency:** Haiku model minimizes API costs
+- **Per skill:** Variable (pdf ~500-1000, docx ~1000-2000)
+- **Efficiency:** Haiku minimizes API costs
 
 ## Security & Isolation
 
 - Agents run in separate Task contexts
-- CONTEXT ISOLATION preamble prevents prompt injection
-- No persistent state between executions
-- Standard Claude Code sandbox protections apply
+- CONTEXT ISOLATION preamble prevents injection
+- No persistent state between sessions
+- Standard Claude Code sandbox protections
 - No external data persistence
 
 ## Version Information
 
-- **Current Version:** 2.0.0
+- **Plugin Architecture Version:** 1.0.0
+- **Each Plugin Version:** 1.0.0
 - **License:** MIT
-- **Repository:** `/Users/huutri/code/synthetic-claude`
 - **Node/Language:** JavaScript + Python (mixed)
-- **Dependencies:** None explicit (runs in Claude Code)
+- **Dependencies:** None explicit (Claude Code runtime)
 
 ## Related Resources
 
-- **Marketplace:** hongbietcode/synthetic-claude
-- **Installation:** See README.md for all 3 scope options
-- **Contribution:** See code-standards.md for patterns
-- **Architecture:** See system-architecture.md for design details
+- **README.md** - User installation & usage guide
+- **docs/project-overview-pdr.md** - Vision, goals, requirements
+- **docs/system-architecture.md** - Plugin interactions, data flow
+- **docs/code-standards.md** - File formats, conventions
+- **docs/project-roadmap.md** - Planned features & releases

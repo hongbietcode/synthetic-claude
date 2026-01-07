@@ -1,0 +1,31 @@
+{
+  "name": "dev-tools",
+  "owner": { "name": "hongbietcode" },
+  "plugins": [{
+    "name": "dev-tools",
+    "source": "./",
+    "description": "Development tools for API implementation, testing, and code review",
+    "version": "1.0.0",
+    "license": "MIT",
+    "keywords": ["api", "backend", "frontend", "testing", "code-review", "mcp"],
+    "category": "development",
+    "commands": [
+      "./commands/px-backend-api.md",
+      "./commands/px-frontend-api.md",
+      "./commands/fastapi-test.md",
+      "./commands/explore-external-APIs.md",
+      "./commands/gen-feature-docs.md",
+      "./commands/generate-db-docs.md"
+    ],
+    "agents": [
+      "./agents/critical-code-reviewer.md"
+    ],
+    "skills": [
+      "./skills/webapp-testing",
+      "./skills/mcp-builder",
+      "./skills/skill-creator",
+      "./skills/cc-hooks-creator"
+    ],
+    "strict": false
+  }]
+}

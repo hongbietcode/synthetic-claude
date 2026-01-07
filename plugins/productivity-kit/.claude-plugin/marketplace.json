@@ -1,0 +1,32 @@
+{
+  "name": "productivity-kit",
+  "owner": { "name": "hongbietcode" },
+  "plugins": [{
+    "name": "productivity-kit",
+    "source": "./",
+    "description": "Productivity tools for project management, refactoring, and research",
+    "version": "1.0.0",
+    "license": "MIT",
+    "keywords": ["productivity", "git", "refactor", "research", "tmux", "memory"],
+    "category": "productivity",
+    "commands": [
+      "./commands/parallel-work.md",
+      "./commands/integrate-parallel-work.md",
+      "./commands/refactor-interactive.md",
+      "./commands/tidy-up.md",
+      "./commands/tidy-docs.md",
+      "./commands/git-configure.md",
+      "./commands/tmux-team-restart.md"
+    ],
+    "agents": [
+      "./agents/research-assistant.md"
+    ],
+    "skills": [
+      "./skills/quick-research",
+      "./skills/tmux-team-creator",
+      "./skills/coder-memory-store",
+      "./skills/coder-memory-recall"
+    ],
+    "strict": false
+  }]
+}

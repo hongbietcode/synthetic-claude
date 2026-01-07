@@ -2,7 +2,7 @@
 
 ## File Format Standards
 
-### Agent Files (`agents/*.md`)
+### Agent Files (`plugins/{plugin-name}/agents/*.md`)
 
 **Structure:** YAML frontmatter + markdown content
 
@@ -39,7 +39,7 @@ Main instructions and behavioral standards.
 3. **Behavioral Contract (MUST NOT)** - Anti-patterns to avoid
 4. **Output format** - Exact markdown structure expected from this agent
 
-### Command Files (`commands/*.md`)
+### Command Files (`plugins/{plugin-name}/commands/*.md`)
 
 **Structure:** YAML frontmatter + markdown content
 
@@ -69,7 +69,7 @@ Command implementation and usage instructions.
 2. **Output** - Expected format/structure
 3. **Examples** - At least 1 concrete example
 
-### Skill Files (`skills/{skill-name}/SKILL.md`)
+### Skill Files (`plugins/{plugin-name}/skills/{skill-name}/SKILL.md`)
 
 **Structure:** YAML frontmatter + markdown content
 
@@ -148,19 +148,39 @@ skills/{skill-name}/
 
 ### Marketplace.json Structure
 
+**Root Aggregator** (`.claude-plugin/marketplace.json`):
+```json
+{
+  "name": "synthetic-claude",
+  "owner": { "name": "hongbietcode" },
+  "plugins": [
+    {
+      "name": "plugin-name",
+      "source": "./plugins/plugin-name",
+      "description": "Clear description",
+      "version": "1.0.0",
+      "license": "MIT",
+      "keywords": ["keyword1", "keyword2"],
+      "category": "workflows|documents|development|design|productivity|content"
+    }
+  ]
+}
+```
+
+**Plugin Marketplace** (`plugins/{plugin-name}/.claude-plugin/marketplace.json`):
 ```json
 {
   "name": "plugin-name",
-  "owner": { "name": "owner-name" },
+  "owner": { "name": "hongbietcode" },
   "plugins": [
     {
       "name": "plugin-name",
       "source": "./",
       "description": "Clear description",
-      "version": "MAJOR.MINOR.PATCH",
+      "version": "1.0.0",
       "license": "MIT",
       "keywords": ["keyword1", "keyword2"],
-      "category": "workflows|productivity|tools",
+      "category": "workflows|documents|development|design|productivity|content",
       "commands": ["./commands/cmd1.md"],
       "agents": ["./agents/agent1.md"],
       "skills": ["./skills/skill1"],
@@ -171,10 +191,12 @@ skills/{skill-name}/
 ```
 
 **Guidelines:**
-- Version: Semantic versioning (MAJOR.MINOR.PATCH)
+- Root aggregator: References plugin directories via source paths
+- Plugin marketplace: Contains local agents, commands, skills with `./` paths
+- Version: Each plugin is 1.0.0; aggregator is also 1.0.0
 - License: Always `MIT`
 - Strict: `false` to allow missing plugin.json in skills
-- Paths: Relative to project root
+- Categories: workflows, documents, development, design, productivity, content
 - Keywords: 5-10 descriptive terms
 
 ## Documentation Standards

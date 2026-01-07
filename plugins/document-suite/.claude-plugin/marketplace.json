@@ -1,0 +1,22 @@
+{
+  "name": "document-suite",
+  "owner": { "name": "hongbietcode" },
+  "plugins": [{
+    "name": "document-suite",
+    "source": "./",
+    "description": "Document processing skills for PDF, DOCX, PPTX, and XLSX files",
+    "version": "1.0.0",
+    "license": "MIT",
+    "keywords": ["pdf", "docx", "pptx", "xlsx", "documents", "office"],
+    "category": "documents",
+    "commands": [],
+    "agents": [],
+    "skills": [
+      "./skills/pdf",
+      "./skills/docx",
+      "./skills/pptx",
+      "./skills/xlsx"
+    ],
+    "strict": false
+  }]
+}

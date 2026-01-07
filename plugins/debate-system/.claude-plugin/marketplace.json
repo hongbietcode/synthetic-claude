@@ -1,0 +1,29 @@
+{
+  "name": "debate-system",
+  "owner": { "name": "hongbietcode" },
+  "plugins": [{
+    "name": "debate-system",
+    "source": "./",
+    "description": "Multi-agent debate system with 3-phase workflow and deep mode for convergence feedback",
+    "version": "1.0.0",
+    "license": "MIT",
+    "keywords": ["multi-agent", "debate", "analysis", "decision-making", "brainstorm"],
+    "category": "workflows",
+    "commands": [
+      "./commands/debate.md",
+      "./commands/quick-brainstorm.md",
+      "./commands/discuss.md",
+      "./commands/think-hard.md"
+    ],
+    "agents": [
+      "./agents/debate-orchestrator.md",
+      "./agents/researcher.md",
+      "./agents/critic.md",
+      "./agents/synthesizer.md"
+    ],
+    "skills": [
+      "./skills/debate-workflow"
+    ],
+    "strict": false
+  }]
+}

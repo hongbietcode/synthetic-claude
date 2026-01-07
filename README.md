@@ -1,54 +1,17 @@
 # Synthetic Claude
 
-Extensible Claude Code plugin with multi-agent debate capabilities, productivity tools, and document processing skills.
+Modular Claude Code plugin marketplace with 6 specialized plugins for selective installation.
 
-## Features
+## Plugins
 
-### Multi-Agent Debate (`/debate`)
-
-Structured 3-phase debate system with optional deep mode for convergence feedback:
-
-**Standard Mode (3-phase):**
-```
-Phase 1 (Individual) → Phase 2 (Discussion) → Phase 3 (Synthesis)
-```
-
-**Deep Mode (with feedback loop, use `--deep` flag):**
-```
-Phase 1 → Phase 2 → Convergence Check ─┬─► Phase 3
-                                       └─► Phase 2b → Phase 3
-```
-
-**Agents:**
-- **Researcher** - Explores possibilities, gathers evidence
-- **Critic** - Challenges assumptions, identifies risks
-- **Synthesizer** - Finds patterns, integrates perspectives
-
-### Productivity Commands
-
-Quick access to structured analysis, brainstorming, refactoring, and project management:
-- `/quick-brainstorm` - Generate ideas with counter-arguments
-- `/discuss` - Rapid discussion with critical analysis
-- `/think-hard` - Challenge assumptions and find gaps
-- `/parallel-work` - Setup Git worktrees for feature development
-- `/refactor-interactive` - Guided refactoring with step explanations
-
-### Document Processing
-
-Full-featured document manipulation:
-- **PDF** - Extract, analyze, and transform PDF content
-- **DOCX** - Word document creation and modification
-- **PPTX** - PowerPoint presentation generation
-- **XLSX** - Excel spreadsheet creation and data manipulation
-
-### Development Tools
-
-Code review, documentation generation, and design assistance:
-- `/px-backend-api` - Implement backend APIs from specifications
-- `/px-frontend-api` - Frontend integration with backend APIs
-- `/gen-feature-docs` - Generate developer and user docs
-- `/design-guide` - Analyze and discuss design improvements
-- `/generate-db-docs` - Create database documentation
+| Plugin | Description | Components | Docs |
+|--------|-------------|------------|------|
+| **[debate-system](./plugins/debate-system/)** | Multi-agent debate with 3-phase workflow | 4 agents, 4 commands, 1 skill | [README](./plugins/debate-system/README.md) |
+| **[document-suite](./plugins/document-suite/)** | PDF, DOCX, PPTX, XLSX processing | 4 skills | [README](./plugins/document-suite/README.md) |
+| **[dev-tools](./plugins/dev-tools/)** | API implementation, testing, code review | 1 agent, 6 commands, 4 skills | [README](./plugins/dev-tools/README.md) |
+| **[design-studio](./plugins/design-studio/)** | UI/UX, frontend design, visual assets | 1 agent, 1 command, 6 skills | [README](./plugins/design-studio/README.md) |
+| **[productivity-kit](./plugins/productivity-kit/)** | Project management, refactoring, research | 1 agent, 7 commands, 4 skills | [README](./plugins/productivity-kit/README.md) |
+| **[content-creation](./plugins/content-creation/)** | Prompting, documentation, LLM apps | 5 commands, 7 skills | [README](./plugins/content-creation/README.md) |
 
 ## Installation
 
@@ -58,151 +21,149 @@ Code review, documentation generation, and design assistance:
 /plugin marketplace add hongbietcode/synthetic-claude
 ```
 
-### Install Plugin
-
-Choose installation scope:
-
-**User Scope (personal, default):**
-```bash
-/plugin install synthetic-claude@synthetic-claude --scope user
-```
-
-**Project Scope (team/version control):**
-```bash
-/plugin install synthetic-claude@synthetic-claude --scope project
-```
-
-**Local Scope (project-specific override):**
-```bash
-/plugin install synthetic-claude@synthetic-claude --scope local
-```
-
-### Verify Installation
+### Install Individual Plugins
 
 ```bash
-/plugin list
+# Install only what you need
+/plugin install synthetic-claude@debate-system
+/plugin install synthetic-claude@document-suite
+/plugin install synthetic-claude@dev-tools
+/plugin install synthetic-claude@design-studio
+/plugin install synthetic-claude@productivity-kit
+/plugin install synthetic-claude@content-creation
 ```
 
-## Usage Examples
-
-### Debate
+### Install All Plugins
 
 ```bash
-# Standard 3-phase debate
-/debate "Should we migrate to microservices?"
-
-# Deep mode with convergence feedback
-/debate "React vs Vue for new project" --deep
-
-# Complex technical decision
-/debate "SQL vs NoSQL for our analytics pipeline"
+/plugin install synthetic-claude@debate-system
+/plugin install synthetic-claude@document-suite
+/plugin install synthetic-claude@dev-tools
+/plugin install synthetic-claude@design-studio
+/plugin install synthetic-claude@productivity-kit
+/plugin install synthetic-claude@content-creation
 ```
 
-**Output format:**
-```markdown
-## Debate: {topic}
+## Plugin Details
 
-### Individual Perspectives
-- Researcher: {findings with evidence}
-- Critic: {risks and concerns}
-- Synthesizer: {integrated patterns}
+### debate-system
 
-### Discussion Highlights
-{key exchanges between agents}
+Multi-agent debate with optional deep mode for convergence feedback.
 
-### Final Synthesis
-{consolidated recommendation with action items}
+**Commands:**
+- `/debate` - Multi-agent debate (use `--deep` for convergence check)
+- `/quick-brainstorm` - Rapid ideation with counter-arguments
+- `/discuss` - Quick discussion with critical analysis
+- `/think-hard` - Challenge assumptions and find gaps
 
-### Next Steps
-{prioritized actions}
-```
+**Agents:** debate-orchestrator, researcher, critic, synthesizer
 
-### Quick Analysis
+### document-suite
 
-```bash
-/quick-brainstorm "Mobile app monetization strategies"
-/think-hard "Performance optimization for large datasets"
-/discuss "API design best practices for our platform"
-```
+Document processing for office formats.
 
-### Document Processing
+**Skills:** pdf, docx, pptx, xlsx
 
-```bash
-# Extract and analyze PDF
-[Use PDF skill to process documents]
+### dev-tools
 
-# Create presentations
-[Use PPTX skill for presentation generation]
+Development and API tools.
 
-# Generate spreadsheets
-[Use XLSX skill for data export]
-```
+**Commands:**
+- `/px-backend-api` - Implement backend APIs from specs
+- `/px-frontend-api` - Frontend integration with backend
+- `/fastapi-test` - Comprehensive API tests
+- `/explore-external-APIs` - Test and document APIs
+- `/gen-feature-docs` - Generate developer + user docs
+- `/generate-db-docs` - Create database documentation
+
+**Agents:** critical-code-reviewer
+
+**Skills:** webapp-testing, mcp-builder, skill-creator, cc-hooks-creator
+
+### design-studio
+
+Design and visual asset tools.
+
+**Commands:**
+- `/design-guide` - Design analysis without modifying code
+
+**Agents:** ui-ux-designer
+
+**Skills:** frontend-design, canvas-design, algorithmic-art, theme-factory, brand-guidelines, slack-gif-creator
+
+### productivity-kit
+
+Project management and productivity tools.
+
+**Commands:**
+- `/parallel-work` - Setup Git worktrees for feature dev
+- `/integrate-parallel-work` - Merge parallel features
+- `/refactor-interactive` - Guided refactoring with steps
+- `/tidy-up` - Cleanup project structure
+- `/tidy-docs` - Reorganize documentation
+- `/git-configure` - Configure Git user (personal/work)
+- `/tmux-team-restart` - Restart tmux with state preservation
+
+**Agents:** research-assistant
+
+**Skills:** quick-research, tmux-team-creator, coder-memory-store, coder-memory-recall
+
+### content-creation
+
+Content and documentation tools.
+
+**Commands:**
+- `/create-project-memory-skills` - Copy memory skills to project
+- `/current-prompt-create` - Create current_prompt.md
+- `/ecp` - Execute prompt from file
+- `/notebook-edit` - Suggest Jupyter notebook changes
+- `/py2notebook` - Convert Python to notebook
+
+**Skills:** prompting, doc-coauthoring, internal-comms, llm-apps-creator, power-agent-creator, web-artifacts-builder, templates
 
 ## Plugin Management
 
 ```bash
-# View all installed plugins
+# View installed plugins
 /plugin list
 
-# Enable/disable
-/plugin enable synthetic-claude@synthetic-claude
-/plugin disable synthetic-claude@synthetic-claude
+# Enable/disable specific plugin
+/plugin enable synthetic-claude@debate-system
+/plugin disable synthetic-claude@document-suite
 
 # Update marketplace
 /plugin marketplace update synthetic-claude
 
-# Uninstall
-/plugin uninstall synthetic-claude@synthetic-claude
+# Uninstall plugin
+/plugin uninstall synthetic-claude@debate-system
 
 # Remove marketplace
 /plugin marketplace remove synthetic-claude
 ```
 
-## Architecture Overview
+## Architecture
 
 ```
 synthetic-claude/
-├── agents/                    # AI agents for debate and analysis
-│   ├── debate-orchestrator    # Coordinates debate workflow
-│   ├── researcher            # Evidence gatherer
-│   ├── critic                # Risk identifier
-│   ├── synthesizer           # Pattern finder
-│   ├── critical-code-reviewer # Code analysis
-│   ├── research-assistant    # Research support
-│   └── ui-ux-designer        # Design guidance
-├── commands/                 # User-facing commands (23 total)
-│   ├── debate                # Multi-agent debate
-│   ├── quick-brainstorm      # Rapid ideation
-│   ├── design-guide          # Design analysis
-│   └── [20+ productivity commands]
-├── skills/                   # Reusable capabilities (26 total)
-│   ├── debate-workflow       # Core debate system
-│   ├── pdf, docx, pptx, xlsx # Document processing
-│   ├── skill-creator         # Skill scaffolding
-│   ├── mcp-builder           # MCP server creation
-│   ├── frontend-design       # Design assets
-│   └── [19+ specialized skills]
-└── .claude-plugin/
-    └── marketplace.json      # Plugin configuration
+├── plugins/
+│   ├── debate-system/          # Multi-agent debate
+│   ├── document-suite/         # Document processing
+│   ├── dev-tools/              # Development tools
+│   ├── design-studio/          # Design tools
+│   ├── productivity-kit/       # Productivity tools
+│   └── content-creation/       # Content tools
+├── .claude-plugin/
+│   └── marketplace.json        # Plugin registry
+├── docs/                       # Documentation
+└── README.md
 ```
-
-## Configuration
-
-All configuration is declarative via YAML frontmatter in agent/command files. No setup required beyond installation.
 
 ## Documentation
 
-- **[Project Overview & PDR](./docs/project-overview-pdr.md)** - Vision, goals, requirements
-- **[System Architecture](./docs/system-architecture.md)** - Plugin structure, component patterns
-- **[Codebase Summary](./docs/codebase-summary.md)** - Full inventory of agents, commands, skills
+- **[Project Overview](./docs/project-overview-pdr.md)** - Vision, goals, requirements
+- **[System Architecture](./docs/system-architecture.md)** - Plugin structure
+- **[Codebase Summary](./docs/codebase-summary.md)** - Component inventory
 - **[Code Standards](./docs/code-standards.md)** - File formats, conventions
-- **[Project Roadmap](./docs/project-roadmap.md)** - Current state, future enhancements
-
-## Support
-
-- Check `/docs` for detailed documentation
-- Review agent/command files for implementation details
-- See marketplace.json for full component registry
 
 ## License
 

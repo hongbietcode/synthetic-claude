@@ -1,0 +1,28 @@
+{
+  "name": "design-studio",
+  "owner": { "name": "hongbietcode" },
+  "plugins": [{
+    "name": "design-studio",
+    "source": "./",
+    "description": "Design tools for UI/UX, frontend design, and visual assets",
+    "version": "1.0.0",
+    "license": "MIT",
+    "keywords": ["design", "ui-ux", "frontend", "canvas", "art", "branding"],
+    "category": "design",
+    "commands": [
+      "./commands/design-guide.md"
+    ],
+    "agents": [
+      "./agents/ui-ux-designer.md"
+    ],
+    "skills": [
+      "./skills/frontend-design",
+      "./skills/canvas-design",
+      "./skills/algorithmic-art",
+      "./skills/theme-factory",
+      "./skills/brand-guidelines",
+      "./skills/slack-gif-creator"
+    ],
+    "strict": false
+  }]
+}

@@ -18,14 +18,15 @@ Enable developers to leverage multi-agent AI systems for structured decision-mak
 
 | Component | Status | Version |
 |-----------|--------|---------|
-| Multi-agent debate system | Complete | 2.0.0 |
-| 3-phase + deep mode workflow | Complete | 2.0.0 |
-| 7 specialized agents | Complete | 2.0.0 |
-| 23 productivity commands | Complete | 2.0.0 |
-| 26 skills (document processing, design, research) | Complete | 2.0.0 |
-| YAML-based configuration | Complete | 2.0.0 |
-| Marketplace integration | Complete | 2.0.0 |
-| Three installation scopes (user/project/local) | Complete | 2.0.0 |
+| 6 modular plugins (debate, documents, dev, design, productivity, content) | Complete | 1.0.0 |
+| Multi-agent debate system (4 agents, 4 commands, 1 skill) | Complete | 1.0.0 |
+| Document suite (4 skills: pdf, docx, pptx, xlsx) | Complete | 1.0.0 |
+| Dev tools (1 agent, 6 commands, 4 skills) | Complete | 1.0.0 |
+| Design studio (1 agent, 1 command, 6 skills) | Complete | 1.0.0 |
+| Productivity kit (1 agent, 7 commands, 4 skills) | Complete | 1.0.0 |
+| Content creation (5 commands, 7 skills) | Complete | 1.0.0 |
+| Aggregator marketplace (references 6 plugins) | Complete | 1.0.0 |
+| Three installation scopes (user/project/local) | Complete | 1.0.0 |
 
 ### Out of Scope
 
@@ -98,29 +99,27 @@ Enable developers to leverage multi-agent AI systems for structured decision-mak
 - Documentation covers 100% of agents, commands, and skills
 - Code standards applied consistently throughout codebase
 
-## Current State (v2.0.0)
+## Current State (v1.0.0 - 6 Plugins)
 
-**Agents (7):**
-- debate-orchestrator, researcher, critic, synthesizer
-- critical-code-reviewer, research-assistant, ui-ux-designer
+**Architecture: 6 Modular Plugins**
+- debate-system: 4 agents, 4 commands, 1 skill
+- document-suite: 4 skills
+- dev-tools: 1 agent, 6 commands, 4 skills
+- design-studio: 1 agent, 1 command, 6 skills
+- productivity-kit: 1 agent, 7 commands, 4 skills
+- content-creation: 5 commands, 7 skills
 
-**Commands (23):**
-- debate, quick-brainstorm, discuss, think-hard
-- parallel-work, px-backend-api, px-frontend-api, design-guide
-- gen-feature-docs, generate-db-docs, tidy-docs, tidy-up
-- [13 more productivity commands]
-
-**Skills (26):**
-- debate-workflow, pdf, docx, pptx, xlsx
-- skill-creator, mcp-builder, frontend-design
-- [19 more specialized skills]
+**Aggregator Marketplace:**
+- Root marketplace.json references all 6 plugins
+- Each plugin independently installable via /plugin install
 
 **Metrics:**
-- Total commands: 23
-- Total agents: 7
-- Total skills: 26
-- Code size: ~1M tokens (1.04M per repomix)
-- Marketplace status: Published
+- Total plugins: 6 (each v1.0.0)
+- Total agents: 7 (distributed across plugins)
+- Total commands: 23 (distributed across plugins)
+- Total skills: 26 (distributed across plugins)
+- Code size: ~1M tokens
+- Installation model: Selective (install only needed plugins)
 
 ## Success Metrics
 
