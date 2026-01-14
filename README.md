@@ -1,11 +1,12 @@
 # Synthetic Claude
 
-Modular Claude Code plugin marketplace with 6 specialized plugins for selective installation.
+Modular Claude Code plugin marketplace with 7 specialized plugins for selective installation.
 
 ## Plugins
 
 | Plugin | Description | Components | Docs |
 |--------|-------------|------------|------|
+| **[basic-workflow](./plugins/basic-workflow/)** | Complete software engineering lifecycle | 11 agents, 54 commands, 16 skills | [README](./plugins/basic-workflow/README.md) |
 | **[debate-system](./plugins/debate-system/)** | Multi-agent debate with 3-phase workflow | 4 agents, 4 commands, 1 skill | [README](./plugins/debate-system/README.md) |
 | **[document-suite](./plugins/document-suite/)** | PDF, DOCX, PPTX, XLSX processing | 4 skills | [README](./plugins/document-suite/README.md) |
 | **[dev-tools](./plugins/dev-tools/)** | API implementation, testing, code review | 1 agent, 6 commands, 4 skills | [README](./plugins/dev-tools/README.md) |
@@ -25,6 +26,7 @@ Modular Claude Code plugin marketplace with 6 specialized plugins for selective 
 
 ```bash
 # Install only what you need
+/plugin install synthetic-claude@basic-workflow
 /plugin install synthetic-claude@debate-system
 /plugin install synthetic-claude@document-suite
 /plugin install synthetic-claude@dev-tools
@@ -36,6 +38,7 @@ Modular Claude Code plugin marketplace with 6 specialized plugins for selective 
 ### Install All Plugins
 
 ```bash
+/plugin install synthetic-claude@basic-workflow
 /plugin install synthetic-claude@debate-system
 /plugin install synthetic-claude@document-suite
 /plugin install synthetic-claude@dev-tools
@@ -45,6 +48,26 @@ Modular Claude Code plugin marketplace with 6 specialized plugins for selective 
 ```
 
 ## Plugin Details
+
+### basic-workflow
+
+Complete development workflow covering the entire software engineering lifecycle.
+
+**Commands:**
+- `/plan`, `/plan:fast`, `/plan:hard`, `/plan:parallel` - Create implementation plans
+- `/code`, `/code:auto`, `/code:parallel` - Implement with testing
+- `/cook`, `/bootstrap` - Bootstrap and implement features
+- `/test`, `/debug`, `/fix` - Test, investigate, and fix issues
+- `/fix:test`, `/fix:types`, `/fix:ci` - Targeted fixes
+- `/review:codebase` - Comprehensive code review
+- `/git:cm`, `/git:cp`, `/git:pr` - Git operations
+- `/docs:init`, `/docs:update` - Documentation management
+- `/skill:create`, `/skill:optimize` - Skill management
+- `/scout`, `/ask`, `/watzup` - Utilities
+
+**Agents:** planner, brainstormer, code-reviewer, tester, debugger, researcher, docs-manager, git-manager, project-manager, scout, scout-external
+
+**Skills:** backend-development, planning, debugging, code-review, research, brainstorming, databases, devops, web-frameworks, chrome-devtools, ui-ux-pro-max, problem-solving, sequential-thinking, docs-seeker, repomix, document-skills
 
 ### debate-system
 
@@ -146,6 +169,7 @@ Content and documentation tools.
 ```
 synthetic-claude/
 ├── plugins/
+│   ├── basic-workflow/         # Complete dev workflow
 │   ├── debate-system/          # Multi-agent debate
 │   ├── document-suite/         # Document processing
 │   ├── dev-tools/              # Development tools

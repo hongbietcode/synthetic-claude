@@ -7,9 +7,11 @@
         {
             "name": "basic-workflow",
             "source": "./",
-            "description": "Comprehensive development workflow with agents, commands, and skills for software engineering tasks",
+            "description": "Comprehensive development workflow with 11 agents, 54 commands, and 16 skills for complete software engineering lifecycle",
             "version": "1.0.0",
             "license": "MIT",
+            "homepage": "https://github.com/hungson175/claude-config",
+            "repository": "https://github.com/hungson175/claude-config/tree/main/plugins/basic-workflow",
             "keywords": [
                 "workflow",
                 "agents",

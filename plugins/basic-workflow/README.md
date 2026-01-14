@@ -1,6 +1,6 @@
 # Basic Workflow
 
-Comprehensive development workflow with agents, commands, and skills for software engineering tasks. This plugin provides a complete toolkit for planning, development, testing, debugging, code review, and documentation.
+Comprehensive development workflow with 11 agents, 54 commands, and 16 skills for complete software engineering lifecycle.
 
 ## Installation
 
@@ -12,169 +12,149 @@ Comprehensive development workflow with agents, commands, and skills for softwar
 
 ### Agents (11)
 
-Specialized subagents for delegating complex tasks:
+Specialized subagents for complex task delegation:
 
-| Agent | Description |
-|-------|-------------|
+| Agent | Purpose |
+|-------|---------|
 | **planner** | Research and create implementation plans |
-| **brainstormer** | Evaluate architectural approaches and technical decisions |
+| **brainstormer** | Evaluate architectural approaches |
 | **code-reviewer** | Comprehensive code quality assessment |
 | **tester** | Run tests and validate implementations |
 | **debugger** | Investigate issues and diagnose problems |
-| **researcher** | Comprehensive technical research and documentation |
-| **docs-manager** | Manage technical documentation and standards |
-| **git-manager** | Stage, commit, and push with conventional commits |
-| **project-manager** | Track progress and coordinate multiple tasks |
-| **scout** | Locate relevant files across codebase |
-| **scout-external** | File search using external agentic tools |
+| **researcher** | Technical research and documentation |
+| **docs-manager** | Manage technical documentation |
+| **git-manager** | Stage, commit, push with conventional commits |
+| **project-manager** | Track progress and coordinate tasks |
+| **scout** | Locate files across codebase |
+| **scout-external** | File search with external tools |
 
-### Commands (64)
+### Commands (54)
 
-#### Planning & Strategy
+#### Planning & Strategy (10)
 - `/plan` - Create implementation plans
 - `/plan:fast`, `/plan:hard`, `/plan:parallel`, `/plan:two` - Plan variants
 - `/plan:ci`, `/plan:cro`, `/plan:archive`, `/plan:validate` - Specialized planning
 - `/brainstorm` - Explore architectural approaches
 
-#### Development
-- `/code` - Implement features with testing
+#### Development (14)
+- `/code` - Implement with testing
 - `/code:auto`, `/code:no-test`, `/code:parallel` - Development variants
-- `/cook` - Bootstrap and implement features
+- `/cook` - Bootstrap and implement
 - `/cook:auto`, `/cook:auto:fast`, `/cook:auto:parallel` - Cook variants
-- `/bootstrap` - Initialize project structure
+- `/bootstrap` - Initialize project
 - `/bootstrap:auto`, `/bootstrap:auto:fast`, `/bootstrap:auto:parallel` - Bootstrap variants
 
-#### Testing & Debugging
-- `/test` - Run test suite
-- `/test:ui` - Test UI components
-- `/debug` - Investigate and diagnose issues
-- `/fix` - Fix bugs and issues
+#### Testing & Debugging (11)
+- `/test`, `/test:ui` - Run tests
+- `/debug` - Investigate issues
+- `/fix` - Fix bugs
 - `/fix:test`, `/fix:types`, `/fix:ui`, `/fix:ci` - Targeted fixes
 - `/fix:fast`, `/fix:hard`, `/fix:parallel`, `/fix:logs` - Fix variants
 
-#### Code Review
-- `/review:codebase` - Comprehensive codebase review
-- `/review:codebase:parallel` - Parallel codebase review
+#### Code Review (2)
+- `/review:codebase` - Comprehensive review
+- `/review:codebase:parallel` - Parallel review
 
-#### Git Operations
-- `/git:cm` - Create git commit
+#### Git Operations (4)
+- `/git:cm` - Create commit
 - `/git:cp` - Commit and push
 - `/git:pr` - Create pull request
 - `/git:merge` - Merge branches
 
-#### Documentation
-- `/docs:init` - Initialize documentation
-- `/docs:update` - Update documentation
-- `/docs:summarize` - Generate documentation summary
+#### Documentation (3)
+- `/docs:init` - Initialize docs
+- `/docs:update` - Update docs
+- `/docs:summarize` - Generate summary
 
-#### Skills Management
-- `/skill:create` - Create new skill
-- `/skill:add` - Add skill reference
-- `/skill:update` - Update existing skill
-- `/skill:optimize` - Optimize skill
-- `/skill:optimize:auto` - Auto-optimize skill
-- `/skill:plan` - Plan skill creation
-- `/skill:fix-logs` - Fix skill logs
+#### Skills Management (7)
+- `/skill:create`, `/skill:add`, `/skill:update` - Skill CRUD
+- `/skill:optimize`, `/skill:optimize:auto` - Optimize skills
+- `/skill:plan`, `/skill:fix-logs` - Plan and fix
 
-#### Utility
-- `/scout` - Find relevant files
-- `/scout:ext` - External file search
-- `/ask` - Ask questions to gather requirements
-- `/watzup` - Check project status
+#### Utility (3)
+- `/scout`, `/scout:ext` - Find files
+- `/ask` - Gather requirements
+- `/watzup` - Check status
 
 ### Skills (16)
 
-Domain-specific expertise for specialized tasks:
+Domain-specific expertise:
 
 | Skill | Description |
 |-------|-------------|
-| **backend-development** | Node.js, APIs, databases, authentication, testing, security |
+| **backend-development** | Node.js, APIs, databases, auth, security, testing |
 | **planning** | Implementation planning and architecture design |
 | **debugging** | Systematic debugging with root cause tracing |
-| **code-review** | Code quality assessment and best practices |
-| **research** | Technical research and documentation gathering |
-| **brainstorming** | Solution evaluation and architectural decisions |
-| **databases** | MongoDB, PostgreSQL, queries, performance, administration |
-| **devops** | Cloudflare, Docker, GCP deployment and infrastructure |
-| **web-frameworks** | Next.js, Turborepo, RemixIcon integration |
+| **code-review** | Code quality and best practices |
+| **research** | Technical research and documentation |
+| **brainstorming** | Solution evaluation and decisions |
+| **databases** | MongoDB, PostgreSQL, queries, performance |
+| **devops** | Cloudflare, Docker, GCP deployment |
+| **web-frameworks** | Next.js, Turborepo, RemixIcon |
 | **chrome-devtools** | Browser automation with Puppeteer |
-| **ui-ux-pro-max** | Frontend design with 50 styles, 21 palettes, 8 stacks |
+| **ui-ux-pro-max** | 50 styles, 21 palettes, 8 stacks |
 | **problem-solving** | Systematic problem-solving techniques |
 | **sequential-thinking** | Advanced reasoning patterns |
-| **docs-seeker** | Search technical documentation via llms.txt |
-| **repomix** | Package codebases for AI analysis |
+| **docs-seeker** | Search docs via llms.txt |
+| **repomix** | Package codebases for AI |
 | **document-skills** | DOCX, PDF, PPTX, XLSX manipulation |
 
 ## Key Features
 
 ### Complete Development Lifecycle
-- **Planning**: Research-driven implementation plans with architectural analysis
-- **Development**: Feature implementation with built-in testing
-- **Testing**: Automated test execution and validation
-- **Debugging**: Systematic issue investigation and root cause analysis
-- **Review**: Comprehensive code quality assessment
-- **Documentation**: Automated documentation management
+Plan → Develop → Test → Debug → Review → Document with specialized agents for each phase.
 
 ### Parallel Execution
-Many commands support parallel execution for faster results:
-- `/plan:parallel` - Run multiple planning agents
-- `/code:parallel` - Parallel implementation
-- `/fix:parallel` - Parallel bug fixes
-- `/review:codebase:parallel` - Parallel code review
+Commands support parallel execution for faster results:
+- `/plan:parallel`, `/code:parallel`, `/fix:parallel`, `/review:codebase:parallel`
 
 ### Specialized Workflows
-- **Bootstrap**: Quick project initialization with `/bootstrap:auto:fast`
-- **CI Fixes**: Targeted CI/CD issue resolution with `/fix:ci`
-- **Type Safety**: TypeScript error fixes with `/fix:types`
-- **UI Debugging**: Frontend-specific debugging with `/fix:ui`
+- **Fast Bootstrap**: `/bootstrap:auto:fast` for quick project init
+- **CI Fixes**: `/fix:ci` for targeted CI/CD issues
+- **Type Safety**: `/fix:types` for TypeScript errors
+- **UI Debugging**: `/fix:ui` for frontend issues
 
-### Agent Delegation
-Automatically delegate tasks to specialized agents:
-- Complex planning → planner agent
-- Bug investigation → debugger agent
-- Code quality → code-reviewer agent
-- Documentation → docs-manager agent
+### Auto Delegation
+Tasks automatically delegated to specialized agents:
+- Planning → planner agent
+- Bugs → debugger agent
+- Quality → code-reviewer agent
+- Docs → docs-manager agent
 
 ## Usage Examples
 
-### Plan and Implement Feature
+### Plan and Implement
 ```bash
 /plan Add user authentication
-# Review plan, then:
-/code Implement authentication plan
+/code Implement authentication
 ```
 
-### Fix Test Failures
+### Fix Failures
 ```bash
-/fix:test
-# Debugger agent investigates and fixes failing tests
+/fix:test    # Fix test failures
+/fix:types   # Fix type errors
+/fix:ci      # Fix CI issues
 ```
 
-### Create Pull Request
+### Git Workflow
 ```bash
-/git:cm "Add authentication feature"
+/git:cm "Add auth feature"
 /git:pr
 ```
 
-### Comprehensive Code Review
+### Quick Start
 ```bash
-/review:codebase:parallel
-# Multiple agents review different aspects in parallel
-```
-
-### Bootstrap New Project
-```bash
-/bootstrap:auto:fast Initialize Next.js app with auth
+/bootstrap:auto:fast Init Next.js app
 ```
 
 ## Philosophy
 
-Built on the holy trinity of software engineering:
+Built on software engineering trinity:
 - **YAGNI** (You Aren't Gonna Need It)
 - **KISS** (Keep It Simple, Stupid)
 - **DRY** (Don't Repeat Yourself)
 
-All agents and commands follow these principles to deliver focused, maintainable solutions.
+All agents follow these principles for focused, maintainable solutions.
 
 ## License
 

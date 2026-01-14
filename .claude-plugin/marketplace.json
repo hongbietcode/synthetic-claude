@@ -55,6 +55,15 @@
       "license": "MIT",
       "keywords": ["content", "prompting", "documentation", "llm", "templates"],
       "category": "content"
+    },
+    {
+      "name": "basic-workflow",
+      "source": "./plugins/basic-workflow",
+      "description": "Comprehensive development workflow with 11 agents, 54 commands, and 16 skills for complete software engineering lifecycle",
+      "version": "1.0.0",
+      "license": "MIT",
+      "keywords": ["workflow", "agents", "development", "planning", "testing", "debugging", "code-review", "git", "documentation"],
+      "category": "development"
     }
   ]
 }
