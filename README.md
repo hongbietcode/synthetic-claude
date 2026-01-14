@@ -4,15 +4,15 @@ Modular Claude Code plugin marketplace with 7 specialized plugins for selective 
 
 ## Plugins
 
-| Plugin | Description | Components | Docs |
-|--------|-------------|------------|------|
-| **[basic-workflow](./plugins/basic-workflow/)** | Complete software engineering lifecycle | 11 agents, 54 commands, 16 skills | [README](./plugins/basic-workflow/README.md) |
-| **[debate-system](./plugins/debate-system/)** | Multi-agent debate with 3-phase workflow | 4 agents, 4 commands, 1 skill | [README](./plugins/debate-system/README.md) |
-| **[document-suite](./plugins/document-suite/)** | PDF, DOCX, PPTX, XLSX processing | 4 skills | [README](./plugins/document-suite/README.md) |
-| **[dev-tools](./plugins/dev-tools/)** | API implementation, testing, code review | 1 agent, 6 commands, 4 skills | [README](./plugins/dev-tools/README.md) |
-| **[design-studio](./plugins/design-studio/)** | UI/UX, frontend design, visual assets | 1 agent, 1 command, 6 skills | [README](./plugins/design-studio/README.md) |
-| **[productivity-kit](./plugins/productivity-kit/)** | Project management, refactoring, research | 1 agent, 7 commands, 4 skills | [README](./plugins/productivity-kit/README.md) |
-| **[content-creation](./plugins/content-creation/)** | Prompting, documentation, LLM apps | 5 commands, 7 skills | [README](./plugins/content-creation/README.md) |
+| Plugin                                              | Description                               | Components                        | Docs                                           |
+| --------------------------------------------------- | ----------------------------------------- | --------------------------------- | ---------------------------------------------- |
+| **[basic-workflow](./plugins/basic-workflow/)**     | Complete software engineering lifecycle   | 11 agents, 54 commands, 16 skills | [README](./plugins/basic-workflow/README.md)   |
+| **[debate-system](./plugins/debate-system/)**       | Multi-agent debate with 3-phase workflow  | 4 agents, 4 commands, 1 skill     | [README](./plugins/debate-system/README.md)    |
+| **[document-suite](./plugins/document-suite/)**     | PDF, DOCX, PPTX, XLSX processing          | 4 skills                          | [README](./plugins/document-suite/README.md)   |
+| **[dev-tools](./plugins/dev-tools/)**               | API implementation, testing, code review  | 1 agent, 6 commands, 4 skills     | [README](./plugins/dev-tools/README.md)        |
+| **[design-studio](./plugins/design-studio/)**       | UI/UX, frontend design, visual assets     | 1 agent, 1 command, 6 skills      | [README](./plugins/design-studio/README.md)    |
+| **[productivity-kit](./plugins/productivity-kit/)** | Project management, refactoring, research | 1 agent, 7 commands, 4 skills     | [README](./plugins/productivity-kit/README.md) |
+| **[content-creation](./plugins/content-creation/)** | Prompting, documentation, LLM apps        | 5 commands, 7 skills              | [README](./plugins/content-creation/README.md) |
 
 ## Installation
 
@@ -26,25 +26,25 @@ Modular Claude Code plugin marketplace with 7 specialized plugins for selective 
 
 ```bash
 # Install only what you need
-/plugin install synthetic-claude@basic-workflow
-/plugin install synthetic-claude@debate-system
-/plugin install synthetic-claude@document-suite
-/plugin install synthetic-claude@dev-tools
-/plugin install synthetic-claude@design-studio
-/plugin install synthetic-claude@productivity-kit
-/plugin install synthetic-claude@content-creation
+/plugin install basic-workflow@synthetic-claude
+/plugin install debate-system@synthetic-claude
+/plugin install document-suite@synthetic-claude
+/plugin install dev-tools@synthetic-claude
+/plugin install design-studio@synthetic-claude
+/plugin install productivity-kit@synthetic-claude
+/plugin install content-creation@synthetic-claude
 ```
 
 ### Install All Plugins
 
 ```bash
-/plugin install synthetic-claude@basic-workflow
-/plugin install synthetic-claude@debate-system
-/plugin install synthetic-claude@document-suite
-/plugin install synthetic-claude@dev-tools
-/plugin install synthetic-claude@design-studio
-/plugin install synthetic-claude@productivity-kit
-/plugin install synthetic-claude@content-creation
+/plugin install basic-workflow@synthetic-claude
+/plugin install debate-system@synthetic-claude
+/plugin install document-suite@synthetic-claude
+/plugin install dev-tools@synthetic-claude
+/plugin install design-studio@synthetic-claude
+/plugin install productivity-kit@synthetic-claude
+/plugin install content-creation@synthetic-claude
 ```
 
 ## Plugin Details
@@ -54,16 +54,17 @@ Modular Claude Code plugin marketplace with 7 specialized plugins for selective 
 Complete development workflow covering the entire software engineering lifecycle.
 
 **Commands:**
-- `/plan`, `/plan:fast`, `/plan:hard`, `/plan:parallel` - Create implementation plans
-- `/code`, `/code:auto`, `/code:parallel` - Implement with testing
-- `/cook`, `/bootstrap` - Bootstrap and implement features
-- `/test`, `/debug`, `/fix` - Test, investigate, and fix issues
-- `/fix:test`, `/fix:types`, `/fix:ci` - Targeted fixes
-- `/review:codebase` - Comprehensive code review
-- `/git:cm`, `/git:cp`, `/git:pr` - Git operations
-- `/docs:init`, `/docs:update` - Documentation management
-- `/skill:create`, `/skill:optimize` - Skill management
-- `/scout`, `/ask`, `/watzup` - Utilities
+
+-   `/plan`, `/plan:fast`, `/plan:hard`, `/plan:parallel` - Create implementation plans
+-   `/code`, `/code:auto`, `/code:parallel` - Implement with testing
+-   `/cook`, `/bootstrap` - Bootstrap and implement features
+-   `/test`, `/debug`, `/fix` - Test, investigate, and fix issues
+-   `/fix:test`, `/fix:types`, `/fix:ci` - Targeted fixes
+-   `/review:codebase` - Comprehensive code review
+-   `/git:cm`, `/git:cp`, `/git:pr` - Git operations
+-   `/docs:init`, `/docs:update` - Documentation management
+-   `/skill:create`, `/skill:optimize` - Skill management
+-   `/scout`, `/ask`, `/watzup` - Utilities
 
 **Agents:** planner, brainstormer, code-reviewer, tester, debugger, researcher, docs-manager, git-manager, project-manager, scout, scout-external
 
@@ -74,10 +75,11 @@ Complete development workflow covering the entire software engineering lifecycle
 Multi-agent debate with optional deep mode for convergence feedback.
 
 **Commands:**
-- `/debate` - Multi-agent debate (use `--deep` for convergence check)
-- `/quick-brainstorm` - Rapid ideation with counter-arguments
-- `/discuss` - Quick discussion with critical analysis
-- `/think-hard` - Challenge assumptions and find gaps
+
+-   `/debate` - Multi-agent debate (use `--deep` for convergence check)
+-   `/quick-brainstorm` - Rapid ideation with counter-arguments
+-   `/discuss` - Quick discussion with critical analysis
+-   `/think-hard` - Challenge assumptions and find gaps
 
 **Agents:** debate-orchestrator, researcher, critic, synthesizer
 
@@ -92,12 +94,13 @@ Document processing for office formats.
 Development and API tools.
 
 **Commands:**
-- `/px-backend-api` - Implement backend APIs from specs
-- `/px-frontend-api` - Frontend integration with backend
-- `/fastapi-test` - Comprehensive API tests
-- `/explore-external-APIs` - Test and document APIs
-- `/gen-feature-docs` - Generate developer + user docs
-- `/generate-db-docs` - Create database documentation
+
+-   `/px-backend-api` - Implement backend APIs from specs
+-   `/px-frontend-api` - Frontend integration with backend
+-   `/fastapi-test` - Comprehensive API tests
+-   `/explore-external-APIs` - Test and document APIs
+-   `/gen-feature-docs` - Generate developer + user docs
+-   `/generate-db-docs` - Create database documentation
 
 **Agents:** critical-code-reviewer
 
@@ -108,7 +111,8 @@ Development and API tools.
 Design and visual asset tools.
 
 **Commands:**
-- `/design-guide` - Design analysis without modifying code
+
+-   `/design-guide` - Design analysis without modifying code
 
 **Agents:** ui-ux-designer
 
@@ -119,13 +123,14 @@ Design and visual asset tools.
 Project management and productivity tools.
 
 **Commands:**
-- `/parallel-work` - Setup Git worktrees for feature dev
-- `/integrate-parallel-work` - Merge parallel features
-- `/refactor-interactive` - Guided refactoring with steps
-- `/tidy-up` - Cleanup project structure
-- `/tidy-docs` - Reorganize documentation
-- `/git-configure` - Configure Git user (personal/work)
-- `/tmux-team-restart` - Restart tmux with state preservation
+
+-   `/parallel-work` - Setup Git worktrees for feature dev
+-   `/integrate-parallel-work` - Merge parallel features
+-   `/refactor-interactive` - Guided refactoring with steps
+-   `/tidy-up` - Cleanup project structure
+-   `/tidy-docs` - Reorganize documentation
+-   `/git-configure` - Configure Git user (personal/work)
+-   `/tmux-team-restart` - Restart tmux with state preservation
 
 **Agents:** research-assistant
 
@@ -134,13 +139,13 @@ Project management and productivity tools.
 ### content-creation
 
 Content and documentation tools.
-
 **Commands:**
-- `/create-project-memory-skills` - Copy memory skills to project
-- `/current-prompt-create` - Create current_prompt.md
-- `/ecp` - Execute prompt from file
-- `/notebook-edit` - Suggest Jupyter notebook changes
-- `/py2notebook` - Convert Python to notebook
+
+-   `/create-project-memory-skills` - Copy memory skills to project
+-   `/current-prompt-create` - Create current_prompt.md
+-   `/ecp` - Execute prompt from file
+-   `/notebook-edit` - Suggest Jupyter notebook changes
+-   `/py2notebook` - Convert Python to notebook
 
 **Skills:** prompting, doc-coauthoring, internal-comms, llm-apps-creator, power-agent-creator, web-artifacts-builder, templates
 
@@ -151,14 +156,14 @@ Content and documentation tools.
 /plugin list
 
 # Enable/disable specific plugin
-/plugin enable synthetic-claude@debate-system
-/plugin disable synthetic-claude@document-suite
+/plugin enable debate-system@synthetic-claude
+/plugin disable document-suite@synthetic-claude
 
 # Update marketplace
 /plugin marketplace update synthetic-claude
 
 # Uninstall plugin
-/plugin uninstall synthetic-claude@debate-system
+/plugin uninstall debate-system@synthetic-claude
 
 # Remove marketplace
 /plugin marketplace remove synthetic-claude
@@ -184,10 +189,10 @@ synthetic-claude/
 
 ## Documentation
 
-- **[Project Overview](./docs/project-overview-pdr.md)** - Vision, goals, requirements
-- **[System Architecture](./docs/system-architecture.md)** - Plugin structure
-- **[Codebase Summary](./docs/codebase-summary.md)** - Component inventory
-- **[Code Standards](./docs/code-standards.md)** - File formats, conventions
+-   **[Project Overview](./docs/project-overview-pdr.md)** - Vision, goals, requirements
+-   **[System Architecture](./docs/system-architecture.md)** - Plugin structure
+-   **[Codebase Summary](./docs/codebase-summary.md)** - Component inventory
+-   **[Code Standards](./docs/code-standards.md)** - File formats, conventions
 
 ## License
 
